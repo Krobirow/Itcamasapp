@@ -1,0 +1,19 @@
+
+.aside {
+	grid-area: a;
+	background-color: rgb(67, 119, 82);
+  }
+  
+  .aside-nav {
+	grid-area: an;
+  }
+  
+  .aside-nav-ul {
+	grid-area: nu;
+  }
+  
+  .aside-nav-ul a {
+	color: black;
+	text-decoration: none;
+	list-style-type: georgian;
+  }
