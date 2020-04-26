@@ -1,12 +1,12 @@
 import React from "react";
 import s from "./post.module.css";
 
-const Post = () => {
+const Post = (props) => {
 	return (
 		<div className={s.postWrap}>
-			<div className={`${s.post} ${s.active}`}>
+			<div className={`${s.post}`}>
 				<img src="https://wallpapercave.com/wp/PCG5mFl.jpg" alt="cat" />
-				post 1
+				{props.message}
 				<div>
 					<span>Like</span>
 					<br/>

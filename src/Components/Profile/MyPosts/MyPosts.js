@@ -9,12 +9,8 @@ const MyPosts = () => {
 	<div className={s.myPostsWrap}>
 		my posts
 		<div className={s.myPostsTitle}> new post</div>
-		<Post />
-		<Post />
-		<Post />
-		<Post />
-		<Post />
-		<Post />
+		<Post message="Hi, how are you ?" />
+		<Post message="It's my first post" />
 	</div>
 
 	);
