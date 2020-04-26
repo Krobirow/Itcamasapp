@@ -1,4 +1,4 @@
-.app-wrapper {
+.appWrapper {
   display: grid;
   margin: 0 auto;
   max-width: 700px;
@@ -10,6 +10,5 @@
   "f f";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 9fr 3fr;
-  /* grid-gap: 10px; */
 }
 

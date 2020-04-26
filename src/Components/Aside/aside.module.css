@@ -1,19 +1,24 @@
-
 .aside {
 	grid-area: a;
 	background-color: rgb(67, 119, 82);
-  }
-  
-  .aside-nav {
+}
+
+.asideNav {
 	grid-area: an;
-  }
-  
-  .aside-nav-ul {
+}
+
+.asideNavUl {
 	grid-area: nu;
-  }
-  
-  .aside-nav-ul a {
-	color: black;
+}
+
+.link {
+	color: white;
 	text-decoration: none;
 	list-style-type: georgian;
-  }
+}
+
+.link.active {
+	color: gold;
+	text-decoration: none;
+	list-style-type: georgian;
+}
