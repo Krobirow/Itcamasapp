@@ -9,8 +9,8 @@ const MyPosts = () => {
 	<div className={s.myPostsWrap}>
 		my posts
 		<div className={s.myPostsTitle}> new post</div>
-		<Post message="Hi, how are you ?" />
-		<Post message="It's my first post" />
+		<Post message="Hi, how are you ?" likesCount="0" dislikesCount="3"/>
+		<Post message="It's my first post" likesCount="34" dislikesCount="5"/>
 	</div>
 
 	);

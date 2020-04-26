@@ -8,9 +8,9 @@ const Post = (props) => {
 				<img src="https://wallpapercave.com/wp/PCG5mFl.jpg" alt="cat" />
 				{props.message}
 				<div>
-					<span>Like</span>
+					<span>Like</span> {props.likesCount}
 					<br/>
-					<span>Dislike</span>
+					<span>Dislike</span> {props.dislikesCount}
 				</div>
 			</div>
 		</div>
