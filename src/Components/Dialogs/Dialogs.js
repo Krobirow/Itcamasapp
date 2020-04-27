@@ -7,19 +7,19 @@ const Dialogs = (props) => {
 		<div className={s.dialogsWrap}>
 			<div className={s.dialogsItem}>
 				<div className={s.dialog}>
-					<NavLink className={s.dialogLink + ' ' + s.active} activeClassName={s.active} to="#$">Andrey</NavLink>
+					<NavLink className={s.dialogLink + ' ' + s.active} activeClassName={s.active} to="/dialogs/1">Andrey</NavLink>
 				</div>
 				<div className={s.dialog}>
-					<NavLink className={s.dialogLink} activeClassName={s.active} to="#%">Eugenij</NavLink>
+					<NavLink className={s.dialogLink} activeClassName={s.active} to="/dialogs/2">Eugenij</NavLink>
 				</div>
 				<div className={s.dialog}>
-					<NavLink className={s.dialogLink} activeClassName={s.active} to="#^">Sasha</NavLink>
+					<NavLink className={s.dialogLink} activeClassName={s.active} to="/dialogs/3">Sasha</NavLink>
 				</div>
 				<div className={s.dialog}>
-					<NavLink className={s.dialogLink} activeClassName={s.active} to="/Ania">Ania</NavLink>
+					<NavLink className={s.dialogLink} activeClassName={s.active} to="/dialogs/4">Ania</NavLink>
 				</div>
 				<div className={s.dialog}>
-					<NavLink className={s.dialogLink} activeClassName={s.active} to="/Vasya">Vasya</NavLink>
+					<NavLink className={s.dialogLink} activeClassName={s.active} to="/dialogs/5">Vasya</NavLink>
 				</div>
 			</div>
 			<div className={s.messages}>
