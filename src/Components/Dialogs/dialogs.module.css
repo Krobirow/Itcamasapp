@@ -1,3 +1,28 @@
 .dialogsWrap {
+	display: grid;
+	grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItem {
+	padding: 10px;
+}
+/* .dialogsItem {
+	color: black;
+} */
+
+.dialogLink {
+	color: black;
+	text-decoration: none;
+}
+
+.dialogLink.active{
+	color: gold;
+}
+
+.messages {
+	padding: 10px;
+}
+
+.message {
 
 }
