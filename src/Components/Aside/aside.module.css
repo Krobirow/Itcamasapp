@@ -5,6 +5,7 @@
 
 .asideNav {
 	grid-area: an;
+	padding: 20px;
 }
 
 .asideNavUl {
@@ -16,8 +17,11 @@
 	text-decoration: none;
 	list-style-type: georgian;
 }
+.link li {
+	padding: 5px;
+}
 
-.link.active {
+.link.activeLink {
 	color: gold;
 	text-decoration: none;
 	list-style-type: georgian;

@@ -1,5 +1,15 @@
 .profileWrap {
-	
+	display: flex;
+	flex-direction: column;
+}
+
+.profileWrap div:nth-child(1) {
+	display: flex;
+}
+
+.profileWrap img {
+	width: 300px;
+	height: 200px;
 }
 
 .avatarDescr {
