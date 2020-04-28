@@ -10,15 +10,19 @@ import Dialogs from "../Dialogs/Dialogs";
 import Footer from "../Footer/Footer";
 import { Route, BrowserRouter } from "react-router-dom";
 
-const App = () => {
+const App = (props) => {
+
+	let {appData } = props;
+	let {dialogsData, messagesData, myPostData} = appData;
+
 	return (
 		<BrowserRouter>
 			<div className={s.appWrapper}>
 				<Header />
 				<Aside />
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' component={Dialogs} />
-					<Route path='/profile' component={Profile} />
+					<Route path='/dialogs' render={ () => <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>}/>
+					<Route path='/profile' render={ () => <Profile myPostData={myPostData} />}/>
 				</div>
 
 				<Footer />

@@ -4,11 +4,12 @@ import s from './profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-const Profile = () => {
+const Profile = (props) => {
+	let {myPostData} = props;
 	return (
 		<section className={s.profileWrap}>
 			<ProfileInfo />
-			<MyPosts />
+			<MyPosts myPostData={myPostData}/>
 		</section>
 	);
 }
