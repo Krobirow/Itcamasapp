@@ -1,8 +1,9 @@
 .myPostsWrap {
-	
+	padding: 10px;
 }
 
 .myPostsTitle {
-
+	display: flex;
+	justify-content: center;
 }
 
