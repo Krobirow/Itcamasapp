@@ -11,9 +11,8 @@ import Footer from "../Footer/Footer";
 import { Route, BrowserRouter } from "react-router-dom";
 
 const App = (props) => {
-
-	let {appData } = props;
-	let {dialogsData, messagesData, myPostData} = appData;
+	
+	let {dialogsData, messagesData, myPostData} = props;
 
 	return (
 		<BrowserRouter>

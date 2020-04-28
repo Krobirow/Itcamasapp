@@ -29,6 +29,6 @@ let appData = {
 	]
 };
 
-ReactDOM.render(<App appData={appData}/>, document.getElementById('root'));
+ReactDOM.render(<App {...appData}/>, document.getElementById('root'));
 
 serviceWorker.unregister();
