@@ -1,5 +1,14 @@
-
-
 .message {
+	display: flex;
+	align-items: center;
+}
+.message span{
+	padding: 5px;
+}
 
+.messageImg img{
+	padding: 5px;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
 }

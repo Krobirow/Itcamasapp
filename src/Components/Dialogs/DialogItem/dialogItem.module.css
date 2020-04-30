@@ -1,4 +1,23 @@
+.dialog {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+}
+
+.dialogIcon {
+	text-decoration: none;
+	padding: 5px;
+}
+.dialogIcon img{
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+}
+
 .dialogLink {
+	padding-left: 5px;
+	padding-right: 10px;
 	color: black;
 	text-decoration: none;
 }

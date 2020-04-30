@@ -12,16 +12,18 @@ import { Route, BrowserRouter } from "react-router-dom";
 
 const App = (props) => {
 	
-	let {dialogsData, messagesData, myPostData} = props;
+	let {appState} = props;
+
+	let {profilePage, dialogsPage, sidebar} = appState;
 
 	return (
 		<BrowserRouter>
 			<div className={s.appWrapper}>
 				<Header />
-				<Aside />
+				<Aside state={sidebar} />
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' render={ () => <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>}/>
-					<Route path='/profile' render={ () => <Profile myPostData={myPostData} />}/>
+					<Route path='/dialogs' render={ () => <Dialogs state={dialogsPage}/>}/>
+					<Route path='/profile' render={ () => <Profile state={profilePage} />}/>
 				</div>
 
 				<Footer />

@@ -1,8 +1,11 @@
 import React from 'react';
 import s from './aside.module.css';
 import { NavLink } from 'react-router-dom';
+import Friends from './Friends/Friends';
 
-const Aside = () => {
+const Aside = (props) => {
+
+
 	return (
 		<div className={s.aside}>
 			<nav className={s.asideNav}>
@@ -14,6 +17,9 @@ const Aside = () => {
 					<NavLink className={s.link} to="#s"><li>Settings</li></NavLink>
 				</ul>
 			</nav>
+			<div>
+				<Friends {...props.state}/>
+			</div>
 		</div>
 	);
 }

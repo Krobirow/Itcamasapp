@@ -5,7 +5,8 @@ import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
-	let {myPostData} = props;
+	let {state} = props
+	let {myPostData} = state;
 	return (
 		<section className={s.profileWrap}>
 			<ProfileInfo />
