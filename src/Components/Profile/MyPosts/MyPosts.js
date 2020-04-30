@@ -8,7 +8,8 @@ const MyPosts = (props) => {
 	let {myPostData} = props;
 
 	let myPostsEl = myPostData
-		.map(p => <Post id={p.id}
+		.map(p => <Post key={p.id}
+			id={p.id}
 			message={p.message}
 			likesCount={p.likesCount}
 			dislikesCount={p.dislikesCount}
