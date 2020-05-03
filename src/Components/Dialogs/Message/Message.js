@@ -4,7 +4,7 @@ import s from "./message.module.css";
 const Message = (props) => {
 	let {messagesData} = props;
 
-	let messageRender = messagesData.map( (m, index) => {
+	let messageRender = messagesData.map(m => {
 		if (m.name === 'Dimych') {
 			return (
 				<div className={s.messageLeft} id={m.id} key={m.id}>

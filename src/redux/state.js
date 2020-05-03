@@ -1,8 +1,6 @@
-const add_Post = 'add_Post';
-const add_Message = 'add_Message';
-const update_New_Post_Text = 'update_New_Post_Text';
-const update_New_Message_Text = 'update_New_Message_Text';
-
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
 let store = {
 	_callSubscriber() {
@@ -65,44 +63,14 @@ let store = {
 	},
 
 	dispatch(action) {
-		if (action.type === 'add_Post') {
-			let newPostDataEl = {
-				id: this._state.profilePage.myPostData.length + 1,
-				message: this._state.profilePage.newPostText,
-				likesCount: 21,
-				dislikesCount: 2,
-			};
-			this._state.profilePage.myPostData.push(newPostDataEl);
-			this._state.profilePage.newPostText = '';
-			this._callSubscriber(this._state);
-		
-		} else if (action.type === 'update_New_Post_Text') {
-			this._state.profilePage.newPostText = action.newText;
-			this._callSubscriber(this._state);
-		
-		} else if (action.type === 'add_Message') {
-			let newMessageDataEl = {
-				id: this._state.dialogsPage.messagesData.length + 1,
-				message: this._state.dialogsPage.newMessageText,
-				name: "me",
-				ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"
-			};
 
-			this._state.dialogsPage.messagesData.push(newMessageDataEl);
-			this._state.dialogsPage.newMessageText = '';
-			this._callSubscriber(this._state);
+		this._state.profilePage =  profileReducer(this._state.profilePage, action);
+		this._state.dialogsPage =  dialogsReducer(this._state.dialogsPage, action);
+		this._state.sidebar =  sidebarReducer(this._state.sidebar, action);
+
+		this._callSubscriber(this._state);
 		
-		} else if (action.type === 'update_New_Message_Text') {
-			this._state.dialogsPage.newMessageText = action.newText;
-			this._callSubscriber(this._state);
-		}
 	},
 }
-
-export const addPostActionCreator = () => ({type: add_Post});
-export const addMessageActionCreator = () => ({type: add_Message});
-
-export const updateNewPostTextActionCreator = (text) => ({type: update_New_Post_Text, newText: text});
-export const updateNewMessageTextActionCreator = (text) => ({type: update_New_Message_Text, newText: text});
 
 export default store;
