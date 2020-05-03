@@ -13,14 +13,3 @@
 	display: flex;
 	flex-direction: column;
 }
-
-.messageLeft {
-	display: flex;
-	justify-content: flex-start;
-	background-color: rgb(130, 182, 152);
-}
-.messageRight {
-	display: flex;
-	justify-content: flex-end;
-	background-color: rgb(182, 130, 130);
-}

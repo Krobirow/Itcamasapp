@@ -5,12 +5,17 @@ import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
-	let {state} = props
-	let {myPostData} = state;
+
+	let {profilePage, addPost, updateNewPostText} = props
+	let {myPostData, newPostText} = profilePage;
 	return (
 		<section className={s.profileWrap}>
 			<ProfileInfo />
-			<MyPosts myPostData={myPostData}/>
+			<MyPosts newPostText={newPostText} 
+				myPostData={myPostData} 
+				addPost={addPost}
+				updateNewPostText={updateNewPostText}
+			/>
 		</section>
 	);
 }

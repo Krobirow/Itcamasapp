@@ -5,25 +5,35 @@ import Message from "./Message/Message";
 
 const Dialogs = (props) => {
 	let {state} = props
-	let {dialogsData, messagesData} = state;
+	let {dialogsData, messagesData, newMessageText} = state;
 
 	let dialogElements = dialogsData.map( d => <DialogItem name={d.name} id={d.id} key={d.id} ava={d.ava}/>);
-	let messageElements = messagesData.map( (m, index) => {
-		if (index % 2 === 0) {
-			return (<span className={s.messageLeft} key={m.id}><Message message={m.message} id={m.id} key={m.id} ava={m.ava}/></span>);
-		} else {
-			return (<span className={s.messageRight} key={m.id}><Message message={m.message} id={m.id} key={m.id} ava={m.ava}/></span>);
-		}
-	});
 
-	return (
+	let newMessageElement = React.createRef();
+
+	let addMessage = () => {
+		props.addMessage();
+	}
+	
+	let onMesageChange = () => {
+		let text = newMessageElement.current.value;
+		props.updateNewMessageText(text);
+	}
+
+	return(
 		<div className={s.dialogsWrap}>
 			<div className={s.dialogsItem}>
 				{dialogElements}
 			</div>
 
 			<div className={s.messages}>
-				{messageElements}
+				<Message messagesData={messagesData}/>
+				<div>
+					<textarea ref={newMessageElement} onChange={onMesageChange} value={newMessageText} name="newPost" cols="20" rows="5"></textarea>
+				</div>
+				<div>
+					<button onClick={addMessage} type="button">Add post</button>
+				</div>
 			</div>
 		</div>
 	);

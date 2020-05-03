@@ -1,3 +1,4 @@
+import { rerenderEntireTree } from "../render";
 
 
 let state = {
@@ -5,7 +6,8 @@ let state = {
 		myPostData: [
 			{ id: 1, message: "It's my first post", likesCount: 34, dislikesCount: 5 },
 			{ id: 2, message: "Hi, how are you ?", likesCount: 3, dislikesCount: 0 }
-		]
+		],
+		newPostText: "It-Camasutra"
 	},
 	dialogsPage: {
 		dialogsData: [
@@ -19,14 +21,15 @@ let state = {
 		],
 
 		messagesData: [
-			{ id: 1, message: "How do You feel?", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-			{ id: 2, message: "How are You ?", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-			{ id: 3, message: "How are they?", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-			{ id: 4, message: "How could You ?", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-			{ id: 5, message: "How much You can ?", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-			{ id: 6, message: "How long is it ?", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-			{ id: 7, message: "Oh, Hi Mark!", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" }
+			{ id: 1, message: "How do You feel?", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+			{ id: 2, message: "How are You ?", name: "Andrey", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"},
+			{ id: 3, message: "How are they?", name: "Eugenij", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"},
+			{ id: 4, message: "How could You ?", name: "Sasha", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"},
+			{ id: 5, message: "How much You can ?", name: "Ania", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"},
+			{ id: 6, message: "How long is it ?", name: "Vasya", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"},
+			{ id: 7, message: "Oh, Hi Mark!", name: "Maks", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"}
 		],
+		newMessageText: "It-Camasutra"
 		
 	},
 	sidebar: {
@@ -36,6 +39,41 @@ let state = {
 			{ id: 3, name: "Eugenij", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"},
 		]
 	}
+}
+
+export let addPost = () => {
+	let newPostDataEl = {
+		id: 5, 
+		message: state.profilePage.newPostText, 
+		likesCount: 21, 
+		dislikesCount: 2,
+	};
+	state.profilePage.myPostData.push(newPostDataEl);
+	state.profilePage.newPostText = '';
+	rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText) => {
+	state.profilePage.newPostText = newText;
+	rerenderEntireTree(state);
+}
+
+export let addMessage = () => {
+	let newMessageDataEl = { 	
+		id: state.dialogsPage.messagesData.length + 1, 
+		message: state.dialogsPage.newMessageText,
+		name: "Maks",
+		ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"
+	};
+
+	state.dialogsPage.messagesData.push(newMessageDataEl);
+	state.dialogsPage.newMessageText = '';
+	rerenderEntireTree(state);
+}
+
+export let updateNewMessageText = (newText) => {
+	state.dialogsPage.newMessageText = newText;
+	rerenderEntireTree(state);
 }
 
 export default state;

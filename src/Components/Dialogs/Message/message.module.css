@@ -5,10 +5,24 @@
 .message span{
 	padding: 5px;
 }
-
+.messageImg{
+	display: flex;
+	flex-direction: column;
+}
 .messageImg img{
 	padding: 5px;
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
+}
+
+.messageLeft {
+	display: flex;
+	justify-content: flex-start;
+	background-color: rgb(130, 182, 152);
+}
+.messageRight {
+	display: flex;
+	justify-content: flex-end;
+	background-color: rgb(182, 130, 130);
 }

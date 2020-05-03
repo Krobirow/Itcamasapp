@@ -5,7 +5,7 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-	let {myPostData} = props;
+	let {myPostData, newPostText} = props;
 
 	let myPostsEl = myPostData
 		.map(p => <Post key={p.id}
@@ -14,6 +14,17 @@ const MyPosts = (props) => {
 			likesCount={p.likesCount}
 			dislikesCount={p.dislikesCount}
 		/>);
+	
+	let newPostElement = React.createRef();
+
+	let addPost = () => {
+		props.addPost();
+	}
+
+	let onPostChange = () => {
+		let text = newPostElement.current.value;
+		props.updateNewPostText(text);
+	}
 
 	return (
 		<div className={s.myPostsWrap}>
@@ -21,10 +32,10 @@ const MyPosts = (props) => {
 				<h2>My Posts</h2>
 			</div>
 			<div>
-				<textarea name="newPost" cols="20" rows="5"></textarea>
+				<textarea ref={newPostElement} onChange={onPostChange} value={newPostText} name="newPost" cols="20" rows="5" />
 			</div>
 			<div>
-				<button type="button">Add post</button>
+				<button onClick={addPost} type="button">Add post</button>
 			</div>
 			<h3 className={s.myPostsTitle}> New Posts</h3>
 			{myPostsEl}
