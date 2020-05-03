@@ -5,7 +5,6 @@ import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
-
 	let {profilePage, addPost, updateNewPostText} = props
 	let {myPostData, newPostText} = profilePage;
 	return (

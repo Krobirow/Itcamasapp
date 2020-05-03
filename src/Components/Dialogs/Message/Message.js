@@ -2,7 +2,6 @@ import React from "react";
 import s from "./message.module.css";
 
 const Message = (props) => {
-
 	let {messagesData} = props;
 
 	let messageRender = messagesData.map( (m, index) => {
@@ -23,8 +22,8 @@ const Message = (props) => {
 				<div className={s.messageRight} id={m.id} key={m.id}>
 					<div className={s.message} id={m.id} key={m.id}>
 						<span className={s.messageImg}>
-							<img src={m.ava} alt="cat"/>
-							<span>{m.name}</span>
+							{/* <img src={m.ava} alt="cat"/> */}
+							{/* <span>{m.name}</span> */}
 						</span>
 						<span>{m.message}</span>
 					</div>

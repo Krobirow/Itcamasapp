@@ -4,7 +4,6 @@ import s from './myposts.module.css';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-
 	let {myPostData, newPostText} = props;
 
 	let myPostsEl = myPostData

@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import Friends from './Friends/Friends';
 
 const Aside = (props) => {
-
-
 	return (
 		<div className={s.aside}>
 			<nav className={s.asideNav}>
@@ -18,7 +16,7 @@ const Aside = (props) => {
 				</ul>
 			</nav>
 			<div>
-				<Friends {...props.state}/>
+				<Friends {...props.sidebar}/>
 			</div>
 		</div>
 	);

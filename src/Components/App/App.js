@@ -11,18 +11,16 @@ import Footer from "../Footer/Footer";
 import { Route } from "react-router-dom";
 
 const App = (props) => {
-	
-	let {appState, addPost, updateNewPostText, addMessage, updateNewMessageText} = props;
-
-	let {profilePage, dialogsPage, sidebar} = appState;
+	let {addPost, updateNewPostText, addMessage, updateNewMessageText, state} = props;
+	let {profilePage, dialogsPage, sidebar} = state;
 
 	return (
 			<div className={s.appWrapper}>
 				<Header />
-				<Aside state={sidebar} />
+				<Aside sidebar={sidebar} />
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' render={ () => <Dialogs state={dialogsPage} addMessage={addMessage} updateNewMessageText={updateNewMessageText}/>}/>
-					<Route path='/profile' render={ () => <Profile profilePage={profilePage} updateNewPostText={updateNewPostText} addPost={addPost}/>}/>
+					<Route path='/dialogs' render={ () => <Dialogs dialogsPage={dialogsPage} addMessage={addMessage} updateNewMessageText={updateNewMessageText}/>}/>
+					<Route path='/profile' render={ () => <Profile profilePage={profilePage} addPost={addPost} updateNewPostText={updateNewPostText} />}/>
 				</div>
 
 				<Footer />
