@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from "../render";
+let rerenderEntireTree = () => {
+	console.log('state js called');
+}
 
 
 let state = {
@@ -41,7 +43,7 @@ let state = {
 	}
 }
 
-export let addPost = () => {
+export const addPost = () => {
 	let newPostDataEl = {
 		id: 5, 
 		message: state.profilePage.newPostText, 
@@ -50,15 +52,15 @@ export let addPost = () => {
 	};
 	state.profilePage.myPostData.push(newPostDataEl);
 	state.profilePage.newPostText = '';
-	rerenderEntireTree(state);
+	rerenderEntireTree();
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
 	state.profilePage.newPostText = newText;
-	rerenderEntireTree(state);
+	rerenderEntireTree();
 }
 
-export let addMessage = () => {
+export const addMessage = () => {
 	let newMessageDataEl = { 	
 		id: state.dialogsPage.messagesData.length + 1, 
 		message: state.dialogsPage.newMessageText,
@@ -68,12 +70,16 @@ export let addMessage = () => {
 
 	state.dialogsPage.messagesData.push(newMessageDataEl);
 	state.dialogsPage.newMessageText = '';
-	rerenderEntireTree(state);
+	rerenderEntireTree();
 }
 
-export let updateNewMessageText = (newText) => {
+export const updateNewMessageText = (newText) => {
 	state.dialogsPage.newMessageText = newText;
-	rerenderEntireTree(state);
+	rerenderEntireTree();
+}
+
+export const subscribe = (observer) => {
+	rerenderEntireTree = observer;
 }
 
 export default state;
