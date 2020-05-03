@@ -5,7 +5,7 @@ const Message = (props) => {
 	let {messagesData} = props;
 
 	let messageRender = messagesData.map( (m, index) => {
-		if (index % 2 === 0) {
+		if (m.name === 'Dimych') {
 			return (
 				<div className={s.messageLeft} id={m.id} key={m.id}>
 					<div className={s.message} id={m.id} key={m.id}>
@@ -17,7 +17,7 @@ const Message = (props) => {
 					</div>
 				</div>
 				)
-		} else {
+		} else if (m.name === 'me') {
 			return (
 				<div className={s.messageRight} id={m.id} key={m.id}>
 					<div className={s.message} id={m.id} key={m.id}>

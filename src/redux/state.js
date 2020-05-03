@@ -1,3 +1,9 @@
+const add_Post = 'add_Post';
+const add_Message = 'add_Message';
+const update_New_Post_Text = 'update_New_Post_Text';
+const update_New_Message_Text = 'update_New_Message_Text';
+
+
 let store = {
 	_callSubscriber() {
 		console.log('state js called');
@@ -22,13 +28,20 @@ let store = {
 			],
 
 			messagesData: [
-				{ id: 1, message: "How do You feel?", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-				{ id: 2, message: "How are You ?", name: "Andrey", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-				{ id: 3, message: "How are they?", name: "Eugenij", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-				{ id: 4, message: "How could You ?", name: "Sasha", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-				{ id: 5, message: "How much You can ?", name: "Ania", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-				{ id: 6, message: "How long is it ?", name: "Vasya", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
-				{ id: 7, message: "Oh, Hi Mark!", name: "Maks", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" }
+				{ id: 1, message: "Hello, my friend", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 2, message: "How are You ?", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 3, message: "Thank You for asking!", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 4, message: "I am good too", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 5, message: "Are you saw Jhimmy today?", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 6, message: "He was in a good mood!", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 7, message: "Ok, I must go, buy", name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 8, message: "Hello!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 9, message: "I am fine, how are You?", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 10, message: "Nice", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 11, message: "No, I dont, why you asking?", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 12, message: "Oh, it's great!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 13, message: "I am happy for him!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
+				{ id: 14, message: "Ok, buy!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" }
 			],
 			newMessageText: "It-Camasutra"
 
@@ -52,7 +65,7 @@ let store = {
 	},
 
 	dispatch(action) {
-		if (action.type === 'addPost') {
+		if (action.type === 'add_Post') {
 			let newPostDataEl = {
 				id: this._state.profilePage.myPostData.length + 1,
 				message: this._state.profilePage.newPostText,
@@ -63,15 +76,15 @@ let store = {
 			this._state.profilePage.newPostText = '';
 			this._callSubscriber(this._state);
 		
-		} else if (action.type === 'updateNewPostText') {
+		} else if (action.type === 'update_New_Post_Text') {
 			this._state.profilePage.newPostText = action.newText;
 			this._callSubscriber(this._state);
 		
-		} else if (action.type === 'addMessage') {
+		} else if (action.type === 'add_Message') {
 			let newMessageDataEl = {
 				id: this._state.dialogsPage.messagesData.length + 1,
 				message: this._state.dialogsPage.newMessageText,
-				name: "Maks",
+				name: "me",
 				ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"
 			};
 
@@ -79,11 +92,17 @@ let store = {
 			this._state.dialogsPage.newMessageText = '';
 			this._callSubscriber(this._state);
 		
-		} else if (action.type === 'updateNewMessageText') {
+		} else if (action.type === 'update_New_Message_Text') {
 			this._state.dialogsPage.newMessageText = action.newText;
 			this._callSubscriber(this._state);
 		}
 	},
 }
+
+export const addPostActionCreator = () => ({type: add_Post});
+export const addMessageActionCreator = () => ({type: add_Message});
+
+export const updateNewPostTextActionCreator = (text) => ({type: update_New_Post_Text, newText: text});
+export const updateNewMessageTextActionCreator = (text) => ({type: update_New_Message_Text, newText: text});
 
 export default store;
