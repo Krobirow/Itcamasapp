@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 import { Route } from "react-router-dom";
 
 const App = (props) => {
-	let {addPost, updateNewPostText, addMessage, updateNewMessageText, state} = props;
+	let {dispatch, state} = props;
 	let {profilePage, dialogsPage, sidebar} = state;
 
 	return (
@@ -19,8 +19,8 @@ const App = (props) => {
 				<Header />
 				<Aside sidebar={sidebar} />
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' render={ () => <Dialogs dialogsPage={dialogsPage} addMessage={addMessage} updateNewMessageText={updateNewMessageText}/>}/>
-					<Route path='/profile' render={ () => <Profile profilePage={profilePage} addPost={addPost} updateNewPostText={updateNewPostText} />}/>
+					<Route path='/dialogs' render={ () => <Dialogs dialogsPage={dialogsPage} dispatch={dispatch}/>}/>
+					<Route path='/profile' render={ () => <Profile profilePage={profilePage} dispatch={dispatch}/>}/>
 				</div>
 
 				<Footer />
