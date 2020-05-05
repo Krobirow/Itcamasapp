@@ -5,22 +5,22 @@ import Header from "../Header/Header";
 import Aside from "../Aside/Aside";
 
 import Profile from "../Profile/Profile";
-import Dialogs from "../Dialogs/Dialogs";
+import DialogsContainer from "../Dialogs/DialogsContainer";
 
 import Footer from "../Footer/Footer";
 import { Route } from "react-router-dom";
 
+
 const App = (props) => {
-	let {dispatch, state} = props;
-	let {profilePage, dialogsPage, sidebar} = state;
+	let {state, store} = props;
 
 	return (
 			<div className={s.appWrapper}>
 				<Header />
-				<Aside sidebar={sidebar} />
+				<Aside sidebar={state.sidebar} />
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' render={ () => <Dialogs dialogsPage={dialogsPage} dispatch={dispatch}/>}/>
-					<Route path='/profile' render={ () => <Profile profilePage={profilePage} dispatch={dispatch}/>}/>
+					<Route path='/dialogs' render={ () => <DialogsContainer store={store}/>}/>
+					<Route path='/profile' render={ () => <Profile store={store}/>}/>
 				</div>
 
 				<Footer />
