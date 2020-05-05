@@ -17,10 +17,14 @@ const App = (props) => {
 	return (
 			<div className={s.appWrapper}>
 				<Header />
-				<Aside sidebar={state.sidebar} />
+				{/* <Aside sidebar={store.getState().sidebar} /> */}
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' render={ () => <DialogsContainer store={store}/>}/>
-					<Route path='/profile' render={ () => <Profile store={store}/>}/>
+					<Route path='/dialogs' render={ () => <DialogsContainer 
+					// store={store}
+					/>}/>
+					<Route path='/profile' render={ () => <Profile 
+					// store={store}
+					/>}/>
 				</div>
 
 				<Footer />
