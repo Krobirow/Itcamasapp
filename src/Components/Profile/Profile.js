@@ -8,9 +8,7 @@ const Profile = (props) => {
 	return (
 		<section className={s.profileWrap}>
 			<ProfileInfo />
-			<MyPostsContainer 
-			// store={props.store}
-			/>
+			<MyPostsContainer/>
 		</section>
 	);
 }

@@ -16,7 +16,7 @@ const Aside = (props) => {
 				</ul>
 			</nav>
 			<div>
-				<Friends {...props.sidebar}/>
+				{/* <Friends {...props.sidebar}/> */}
 			</div>
 		</div>
 	);

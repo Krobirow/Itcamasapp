@@ -11,20 +11,18 @@ import Footer from "../Footer/Footer";
 import { Route } from "react-router-dom";
 
 
-const App = (props) => {
-	let {state, store} = props;
+const App = () => {
+	// let {state, store} = props;
 
 	return (
 			<div className={s.appWrapper}>
 				<Header />
-				{/* <Aside sidebar={store.getState().sidebar} /> */}
+				<Aside  />
 				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' render={ () => <DialogsContainer 
-					// store={store}
-					/>}/>
-					<Route path='/profile' render={ () => <Profile 
-					// store={store}
-					/>}/>
+					<Route path='/dialogs' 
+						render={ () => <DialogsContainer/>} />
+					<Route path='/profile' 
+						render={ () => <Profile/>}/>
 				</div>
 
 				<Footer />
