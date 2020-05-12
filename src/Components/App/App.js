@@ -6,14 +6,13 @@ import Aside from "../Aside/Aside";
 
 import Profile from "../Profile/Profile";
 import DialogsContainer from "../Dialogs/DialogsContainer";
+import UsersContainer from "../Users/UsersContainer";
 
 import Footer from "../Footer/Footer";
+
 import { Route } from "react-router-dom";
 
-
 const App = () => {
-	// let {state, store} = props;
-
 	return (
 			<div className={s.appWrapper}>
 				<Header />
@@ -23,8 +22,9 @@ const App = () => {
 						render={ () => <DialogsContainer/>} />
 					<Route path='/profile' 
 						render={ () => <Profile/>}/>
+					<Route path='/users' 
+						render={ () => <UsersContainer/>}/>
 				</div>
-
 				<Footer />
 			</div>
 	);

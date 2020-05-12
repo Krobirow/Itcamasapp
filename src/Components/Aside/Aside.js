@@ -10,6 +10,7 @@ const Aside = (props) => {
 				<ul className={s.asideNavUl}>
 					<NavLink className={s.link} activeClassName={s.activeLink} to="/profile"><li>Profile</li></NavLink>
 					<NavLink className={s.link} activeClassName={s.activeLink} to="/dialogs"><li>Messages</li></NavLink>
+					<NavLink className={s.link} activeClassName={s.activeLink} to="/users"><li>Users</li></NavLink>
 					<NavLink className={s.link} to="#s"><li>News</li></NavLink>
 					<NavLink className={s.link} to="#s"><li>Music</li></NavLink>
 					<NavLink className={s.link} to="#s"><li>Settings</li></NavLink>
