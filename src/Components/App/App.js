@@ -4,13 +4,13 @@ import s from "./App.module.css";
 import Header from "../Header/Header";
 import Aside from "../Aside/Aside";
 
-import Profile from "../Profile/Profile";
 import DialogsContainer from "../Dialogs/DialogsContainer";
 import UsersContainer from "../Users/UsersContainer";
 
 import Footer from "../Footer/Footer";
 
 import { Route } from "react-router-dom";
+import ProfileContainer from "../Profile/ProfileContainer";
 
 const App = () => {
 	return (
@@ -21,7 +21,7 @@ const App = () => {
 					<Route path='/dialogs' 
 						render={ () => <DialogsContainer/>} />
 					<Route path='/profile' 
-						render={ () => <Profile/>}/>
+						render={ () => <ProfileContainer/>}/>
 					<Route path='/users' 
 						render={ () => <UsersContainer/>}/>
 				</div>

@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profileReducer';
+import { addPost, updateNewPostText } from '../../../redux/profileReducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 
@@ -9,11 +7,11 @@ import { connect } from 'react-redux';
 // 	// let state = props.store.getState();
 
 // 	// let addPost = () => {
-// 	// 	props.store.dispatch(addPostActionCreator());
+// 	// 	props.store.dispatch(addPost());
 // 	// }
 
 // 	// let onPostChange = (text) => {
-// 	// 	let action = updateNewPostTextActionCreator(text);
+// 	// 	let action = updateNewPostText(text);
 // 	// 	props.store.dispatch(action);
 // 	// }
 
@@ -23,15 +21,15 @@ import { connect } from 'react-redux';
 // 			(store) => {
 // 				let state = store.getState();
 // 				let addPost = () => {
-// 					store.dispatch(addPostActionCreator());
+// 					store.dispatch(addPost());
 // 				}
 
 // 				let onPostChange = (text) => {
-// 					let action = updateNewPostTextActionCreator(text);
+// 					let action = updateNewPostText(text);
 // 					store.dispatch(action);
 // 				}
 // 				return (<MyPosts
-// 					updateNewPostTextActionCreator={onPostChange}
+// 					updateNewPostText={onPostChange}
 // 					addPost={addPost}
 // 					myPostData={state.profilePage.myPostData}
 // 					newPostText={state.profilePage.newPostText}
@@ -49,18 +47,17 @@ let mapStateToProps = (state) => {
 	}
 }
 
-let mapDispatchToProps = (dispatch) => {
-	return {
-		addPost: () => {
-			dispatch(addPostActionCreator());
-		},
-		updateNewPostTextActionCreator: (text) => {
-			dispatch(updateNewPostTextActionCreator(text));
-		}
-	}
-}
+// let mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		addPost: () => {
+// 			dispatch(addPost());
+// 		},
+// 		updateNewPostText: (text) => {
+// 			dispatch(updateNewPostText(text));
+// 		}
+// 	}
+// }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
-
+const MyPostsContainer = connect(mapStateToProps, {addPost, updateNewPostText})(MyPosts);
 
 export default MyPostsContainer;

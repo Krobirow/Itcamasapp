@@ -9,12 +9,12 @@ const Dialogs = (props) => {
 	let dialogElements = state.dialogsData.map( d => <DialogItem name={d.name} id={d.id} key={d.id} ava={d.ava}/>);
 
 	let addMessage = () => {
-		props.addMessageActionCreator();
+		props.addMessage();
 	}
 	
 	let onMesageChange = (e) => {
 		let text = e.target.value;
-		props.updateNewMessageTextActionCreator(text);
+		props.updateNewMessageText(text);
 	}
 
 	return(
