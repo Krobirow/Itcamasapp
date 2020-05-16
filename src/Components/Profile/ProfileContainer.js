@@ -9,7 +9,7 @@ class ProfileContainer extends Component {
 	componentDidMount() {
 		axios
 			.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-			.then((response) => {
+			.then(response => {
 				this.props.setUserProfile(response.data);
 			});
 	}

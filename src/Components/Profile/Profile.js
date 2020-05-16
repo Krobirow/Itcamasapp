@@ -5,7 +5,6 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 const Profile = (props) => {
-	console.log(props);
 	return (
 		<section className={s.profileWrap}>
 			<ProfileInfo profile={props.profile}/>
