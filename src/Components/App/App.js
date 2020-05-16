@@ -14,19 +14,16 @@ import ProfileContainer from "../Profile/ProfileContainer";
 
 const App = () => {
 	return (
-			<div className={s.appWrapper}>
-				<Header />
-				<Aside  />
-				<div className={s.appWrapperContent}>
-					<Route path='/dialogs' 
-						render={ () => <DialogsContainer/>} />
-					<Route path='/profile' 
-						render={ () => <ProfileContainer/>}/>
-					<Route path='/users' 
-						render={ () => <UsersContainer/>}/>
-				</div>
-				<Footer />
+		<div className={s.appWrapper}>
+			<Header />
+			<Aside />
+			<div className={s.appWrapperContent}>
+				<Route path='/dialogs' render={() => <DialogsContainer />} />
+				<Route path='/profile' render={() => <ProfileContainer />} />
+				<Route path='/users' render={() => <UsersContainer />} />
 			</div>
+			<Footer />
+		</div>
 	);
 };
 
