@@ -17,7 +17,7 @@ let Users = (props) => {
 				<div className={s.paginationWrapp}>
 					{pages.map(page => {
 						if(page <= 25) {
-							return <span onClick={(e) => {props.onPageChanger(page);}} className={props.currentPage === page && s.selectedPage}>{page}</span>
+							return <span key={page} onClick={(e) => {props.onPageChanger(page);}} className={props.currentPage === page ? s.selectedPage : undefined}>{page}</span>
 						}
 					})}
 				</div>
