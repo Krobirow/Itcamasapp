@@ -26,6 +26,21 @@ class UsersContainer extends Component {
 				this.props.setUsers(data.items);
 			});
 	}
+	onUnfollowed = (userId) => {
+		usersApi.onUnfollow(userId).then(data => {
+			if (data.resultCode === 0) {
+				unfollow(userId);
+			}
+		})
+	}
+
+	onFollowed = (userId) => {
+		usersApi.onFollow(userId).then(data => {
+			if (data.resultCode === 0) {
+				follow(userId);
+			}
+		})
+	}
 
 	render() {
 		return (
@@ -36,8 +51,8 @@ class UsersContainer extends Component {
 					currentPage={this.props.currentPage}
 					onPageChanger={this.onPageChanger}
 					users={this.props.users}
-					follow={this.props.follow}
-					unfollow={this.props.unfollow}
+					onFollowed={this.onFollowed}
+					onUnfollowed={this.onUnfollowed}
 				/>
 			</>
 		)
