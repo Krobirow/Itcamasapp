@@ -1,12 +1,9 @@
 import React from 'react';
 import s from './users.module.css';
 import { NavLink } from 'react-router-dom';
-import * as axios from "axios";
 
 let Users = (props) => {
 	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-	console.log(props);
 
 	let pages = [];
 	for (let i = 1; i <= pagesCount; i++) {
@@ -51,13 +48,13 @@ let Users = (props) => {
 						</div>
 						<div>
 							{u.followed ? (
-								<button
-									onClick={()=> { props.onUnfollowed(u.id); }}>
+								<button disabled={props.followingInProgress.some(id => id === u.id)}
+									onClick={() => { props.onUnfollowed(u.id); }}>
 									Follow
 								</button>
 							) : (
-								<button
-									onClick={()=> { props.onFollowed(u.id); }}>
+								<button disabled={props.followingInProgress.some(id => id === u.id)}
+									onClick={() => { props.onFollowed(u.id); }}>
 									Unfollow
 								</button>
 							)}
