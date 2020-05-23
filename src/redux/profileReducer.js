@@ -43,9 +43,10 @@ const profileReducer = (state = initialState, action) => {
 	}
 }
 
+const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+
 export const addPost = () => ({type: add_Post});
 export const updateNewPostText = (text) => ({type: update_New_Post_Text, newText: text});
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export const getProfilePage = (userId) => (dispatch) => profilesApi.getProfile(userId).then(data => dispatch(setUserProfile(data)));
 
