@@ -15,35 +15,16 @@ export const usersApi = {
     }
 }
 
-export const authApi = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => response.data)
-    },
-    someFunc(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => response.data)
-    }
-}
-
 export const profilesApi = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => response.data)
-    },
-    someFunc(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+    getProfile(userId) {
+        return instance.get(`profile/${userId}`)
         .then(response => response.data)
     }
 }
 
-export const followWatcherApi = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => response.data)
-    },
-    someFunc(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+export const authApi = {
+    authMe() {
+        return instance.get(`auth/me`)
         .then(response => response.data)
     }
 }

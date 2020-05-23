@@ -14,7 +14,7 @@ let Users = (props) => {
 		<div>
 			<div className={s.paginationWrapp}>
 				{pages.map((page) => {
-					if (page <= 25) {
+					{/* if (page <= 25) { */}
 						return (
 							<span
 								key={page}
@@ -27,7 +27,7 @@ let Users = (props) => {
 								{page}
 							</span>
 						);
-					}
+					{/* } */}
 				})}
 			</div>
 

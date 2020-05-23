@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-// import { usersApi } from "../../api/api";
+
 import {unfollowSuccess, followSuccess, setCurrentPage, getUsers, follow, unFollow } from '../../redux/userReducer';
 import Preloader from "../Preloader/Preloader";
 import Users from "./Users";
-
-
-
 class UsersContainer extends Component {
 	componentDidMount() {
 		this.props.getUsers(this.props.currentPage, this.props.pageSize);
