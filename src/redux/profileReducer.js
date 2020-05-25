@@ -1,8 +1,9 @@
 import { profilesApi } from "../api/api";
 
-const add_Post = 'add_Post';
-const update_New_Post_Text = 'update_New_Post_Text';
+const ADD_POST = 'ADD_POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
 	myPostData: [
@@ -10,12 +11,13 @@ let initialState = {
 		{ id: 2, message: "Hi, how are you ?", likesCount: 3, dislikesCount: 0 }
 	],
 	newPostText: "It-Camasutra",
-	profile: null
+	profile: null,
+	status: ""
 };
 
 const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case add_Post:
+		case ADD_POST:
 			return {
 				...state,
 				myPostData: [
@@ -29,7 +31,7 @@ const profileReducer = (state = initialState, action) => {
 				],
 				newPostText: ''
 			};
-		case update_New_Post_Text: 
+		case UPDATE_NEW_POST_TEXT: 
 			return {
 				...state,
 				newPostText: action.newText
@@ -38,15 +40,26 @@ const profileReducer = (state = initialState, action) => {
 			return {
 				...state, profile: action.profile
 			}
+		case SET_STATUS:
+			return {
+				...state, status: action.status
+			}
 		default:
 			return state;
 	}
 }
 
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+const setStatus = (status) => ({type: SET_STATUS, status});
 
-export const addPost = () => ({type: add_Post});
-export const updateNewPostText = (text) => ({type: update_New_Post_Text, newText: text});
+export const getUserStatus = userId =>  dispatch => profilesApi.getStatus(userId).then(data => dispatch(setStatus(data)))
+
+export const updateUserStatus = status =>  dispatch => profilesApi.updateStatus(status).then(data => {if (data.resultCode === 0) dispatch(setStatus(status))})
+
+
+
+export const addPost = () => ({type: ADD_POST});
+export const updateNewPostText = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 
 export const getProfilePage = (userId) => (dispatch) => profilesApi.getProfile(userId).then(data => dispatch(setUserProfile(data)));
 

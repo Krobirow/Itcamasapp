@@ -17,7 +17,7 @@ const ProfileInfo = (props) => {
 			<div className={s.avatarDescr}>
 				<img src={props.profile.photos.large ? props.profile.photos.large : 'https://wallpapercave.com/wp/PCG5mFl.jpg'} alt="ava" />
 				<div>
-					<ProfileStatus status={"Hello my friends!"}/>
+					<ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
 				</div>
 				
 			</div>
