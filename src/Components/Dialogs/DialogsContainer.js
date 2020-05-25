@@ -2,6 +2,7 @@ import { addMessage, updateNewMessageText } from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from 'react-redux';
 import { withAuthRedirect } from '../hoc/WithAuthRedirect';
+import { compose } from "redux";
 
 let mapStateToProps = (state) => {
 	return {
@@ -9,7 +10,7 @@ let mapStateToProps = (state) => {
 	}
 }
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
+
 
 // прототип создания ХОК, логика которая выносится в отдельную функцию с классом
 // внутри себя
@@ -32,6 +33,16 @@ let AuthRedirectComponent = withAuthRedirect(Dialogs);
 // 	}
 // }
 
-const DialogsContainer = connect(mapStateToProps, {addMessage, updateNewMessageText})(AuthRedirectComponent);
+compose(
+	connect(mapStateToProps, {addMessage, updateNewMessageText}),
+	withAuthRedirect
+)(Dialogs);
 
-export default DialogsContainer;
+// let AuthRedirectComponent = withAuthRedirect(Dialogs);
+
+// const DialogsContainer = connect(mapStateToProps, {addMessage, updateNewMessageText})(AuthRedirectComponent);
+
+export default compose(
+	connect(mapStateToProps, {addMessage, updateNewMessageText}),
+	withAuthRedirect
+)(Dialogs);
