@@ -11,6 +11,7 @@ import HeaderContainer from "../Header/HeaderContainer";
 import Footer from "../Footer/Footer";
 
 import { Route } from "react-router-dom";
+import LoginPage from "../Login/Login";
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
 				<Route path='/dialogs' render={() => <DialogsContainer />} />
 				<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
 				<Route path='/users' render={() => <UsersContainer />} />
+				<Route path='/login' render={() => <LoginPage />} />
 			</div>
 			<Footer />
 		</div>
