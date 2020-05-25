@@ -10,8 +10,6 @@ let mapStateToProps = (state) => {
 	}
 }
 
-
-
 // прототип создания ХОК, логика которая выносится в отдельную функцию с классом
 // внутри себя
 
@@ -32,15 +30,6 @@ let mapStateToProps = (state) => {
 // 		}
 // 	}
 // }
-
-compose(
-	connect(mapStateToProps, {addMessage, updateNewMessageText}),
-	withAuthRedirect
-)(Dialogs);
-
-// let AuthRedirectComponent = withAuthRedirect(Dialogs);
-
-// const DialogsContainer = connect(mapStateToProps, {addMessage, updateNewMessageText})(AuthRedirectComponent);
 
 export default compose(
 	connect(mapStateToProps, {addMessage, updateNewMessageText}),
