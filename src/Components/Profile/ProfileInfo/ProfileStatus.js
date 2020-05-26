@@ -24,17 +24,25 @@ export default class ProfileStatus extends Component {
         })
     }
 
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.status !== this.props.status) this.setState({status: this.props.status});
+        let a = this.state;
+        let b = this.props;
+        console.log('componentDidUpdate');
+    }
+
 	render() {
+        console.log('render');
 		return (
 			<>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={ this.activateEditMode}>{this.props.status  || "No status here!"}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status  || "No status here!"}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={ this.deactivateEditMode} defaultValue={this.state.status} />
+                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={ this.deactivateEditMode} value={this.state.status} />
                     </div>
                 }
 			</>

@@ -7,7 +7,7 @@ import { compose } from 'redux';
 class ProfileContainer extends Component {
 	componentDidMount() {
 		let userId = this.props.match.params.userId;
-		if(!userId) userId = 2;
+		if(!userId) userId = 8300;
 		this.props.getProfilePage(userId);
 
 		this.props.getUserStatus(userId);
