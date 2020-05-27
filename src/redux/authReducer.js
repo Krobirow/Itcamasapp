@@ -1,7 +1,6 @@
 import { authApi } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
-const LOGIN_USER = 'LOGIN_USER';
 
 let initialState = {
 	userId: null,
@@ -17,33 +16,22 @@ const authReducer = (state = initialState, action) => {
 		case SET_USER_DATA: 
 			return {
 				...state, 
-				...action.data,
-				isAuth: true
+				...action.payload
 			}
-		case LOGIN_USER: 
-			return {
-				...state,
-				...action.data,
-				isAuth: true,
-			}
-
 		default:
 			return state;
 	}
 }
 
-// export const loginProcess = (email, password, rememberMe) => ({type: LOGIN_USER, data: {email, password, rememberMe}});
-
-export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}});
+export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth}});
 
 export const authorization = () => dispatch => authApi.authMe()
-	.then(data => {if (data.resultCode === 0) dispatch(setAuthUserData(data.data.id, data.data.email, data.data.login))});
+	.then(data => {if (data.resultCode === 0) dispatch(setAuthUserData(data.data.id, data.data.email, data.data.login, true))});
 
-// export const startLogin = () => dispatch => authApi.loginMe().then(data => { 
-// 		if (data.resultCode === 0) {
-// 			console.log(data);
-// 			dispatch(loginProcess(data.data.email, data.data.password, data.data.rememberMe))
-// 		}
-// 	});
+export const startLogin = (email, password, rememberMe) => dispatch => authApi.loginMe(email, password, rememberMe)
+	.then(data => { if (data.resultCode === 0) dispatch( authorization() ) });
+
+export const startLogout = () => dispatch => authApi.logout()
+	.then(data => { if (data.resultCode === 0) dispatch( setAuthUserData(null, null, null, false) ) });
 
 export default authReducer;

@@ -56,7 +56,7 @@ const userReducer = (state = initialState, action) => {
 
 		case TOGGLE_IS_FETCHING : 
 			return {
-				...state, isFetching: action.toggleFetching
+				...state, isFetching: action.isFetching
 			}
 		case TOGGLE_IS_FOLLOWING_PROGRESS:
 			return {
@@ -70,12 +70,14 @@ const userReducer = (state = initialState, action) => {
 	}
 }
 
+const isToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+
 export const followSuccess = (userId) => ({type: FOLLOW, userId});
 export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
 export const setUsersTotalCount = (totalCount) => ({type: SET_USERS_TOTAL_COUNT, totalCount})
-export const isToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+
 export const isToggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
 
 export const getUsers = (currentPage = 1, pageSize) => {
@@ -85,9 +87,9 @@ export const getUsers = (currentPage = 1, pageSize) => {
 		dispatch(setCurrentPage(currentPage));
 
 		usersApi.getUsers(currentPage, pageSize).then((data) => {
-			dispatch(isToggleFetching(false));
 			dispatch(setUsers(data.items));
 			dispatch(setUsersTotalCount(data.totalCount));
+			dispatch(isToggleFetching(false));
 			});
 	}
 }

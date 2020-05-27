@@ -6,10 +6,10 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 const Profile = (props) => {
 	return (
-		<section className={s.profileWrap}>
+		<div className={s.profileWrap}>
 			<ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
 			<MyPostsContainer/>
-		</section>
+		</div>
 	);
 }
 

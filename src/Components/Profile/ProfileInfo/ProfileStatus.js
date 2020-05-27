@@ -29,7 +29,6 @@ export default class ProfileStatus extends Component {
     }
 
 	render() {
-        console.log('render');
 		return (
 			<>
                 {!this.state.editMode &&

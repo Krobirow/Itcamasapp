@@ -1,10 +1,11 @@
 import React from "react";
 import s from "./login.module.css";
 import { reduxForm, Field } from "redux-form";
-import { startLogin, loginProcess } from "../../redux/authReducer";
-import { authApi } from "../../api/api";
+import { startLogin, startLogout } from "../../redux/authReducer";
 import { Input } from "../common/FormsControls/FormsControls";
 import { required } from "../../utils/validators/validators";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const LoginForm = (props) => {
 	return (
@@ -20,7 +21,7 @@ const LoginForm = (props) => {
 			</div>
 			<div>
 				<Field
-					type={"text"}
+					type={"password"}
 					placeholder={"Password"}
 					name={"password"}
 					component={Input}
@@ -43,17 +44,12 @@ const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 
 const Login = (props) => {
 	const onSubmit = (formData) => {
-		console.log(formData);
-		// const { email, password, rememberMe } = formData;
-		// // startLogin(email, password, rememberMe);
-
-		// authApi.loginMe().then((data) => {
-		// 	console.log(data);
-		// 	if (data.resultCode === 0) {
-		// 		loginProcess(email, password, rememberMe);
-		// 	}
-		// });
+		props.startLogin(formData.email, formData.password, formData.rememberMe)
 	};
+
+	if(props.isAuth) {
+		return <Redirect to={"/profile"} />
+	}
 
 	return (
 		<div className={s.loginWrapper}>
@@ -65,4 +61,9 @@ const Login = (props) => {
 	);
 };
 
-export default Login;
+const mapStateToProps = state => ({
+	isAuth: state.auth.isAuth
+})
+
+
+export default connect(mapStateToProps, {startLogin, startLogout})(Login);

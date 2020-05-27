@@ -37,7 +37,6 @@ const MyPosts = (props) => {
 		/>);
 
 	const addNewPost = (values) => {
-		console.log(values.newPostText);
 		props.addPost(values.newPostText);
 	}
 

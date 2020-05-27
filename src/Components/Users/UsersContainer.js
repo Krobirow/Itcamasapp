@@ -17,7 +17,7 @@ class UsersContainer extends Component {
 	render() {
 		return (
 			<>
-				{this.props.isFetching ? <Preloader /> : null}
+				{this.props.isFetching ? <Preloader /> : null }
 				<Users totalUsersCount={this.props.totalUsersCount} 
 					pageSize={this.props.pageSize}
 					currentPage={this.props.currentPage}
@@ -42,12 +42,6 @@ let mapStateToProps = (state) => {
 		followingInProgress: state.usersPage.followingInProgress
 	}
 }
-
-// let withRedirect = withAuthRedirect(UsersContainer);
-
-// export default withAuthRedirect(connect(mapStateToProps, 
-// 	{follow, unFollow, followSuccess, unfollowSuccess,
-// 	setCurrentPage, getUsers})(UsersContainer));
 
 export default compose(
 	connect(mapStateToProps,{follow, unFollow, followSuccess, unfollowSuccess,

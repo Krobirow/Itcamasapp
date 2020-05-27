@@ -11,9 +11,6 @@ const ProfileInfo = (props) => {
 
 	return (
 		<div className={s.profileInfo}>
-			{/* <div className={s.avatar}>
-				<img src="https://cdn.pixabay.com/photo/2016/02/19/10/25/beach-1209229__340.jpg" alt="beach" />
-			</div> */}
 			<div className={s.avatarDescr}>
 				<img src={props.profile.photos.large ? props.profile.photos.large : 'https://wallpapercave.com/wp/PCG5mFl.jpg'} alt="ava" />
 				<div>

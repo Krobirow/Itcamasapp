@@ -3,6 +3,7 @@ import { profilesApi } from "../api/api";
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
 	myPostData: [
@@ -10,7 +11,8 @@ let initialState = {
 		{ id: 2, postText: "Hi, how are you ?", likesCount: 3, dislikesCount: 0 }
 	],
 	profile: null,
-	status: ""
+	status: "",
+	isFetching: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -36,6 +38,10 @@ const profileReducer = (state = initialState, action) => {
 			return {
 				...state, status: action.status
 			}
+		case TOGGLE_IS_FETCHING : 
+			return {
+				...state, isFetching: action.isFetching
+			}
 		default:
 			return state;
 	}
@@ -44,10 +50,19 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+const isToggleFetchingProfile = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+
 const setStatus = (status) => ({type: SET_STATUS, status});
 
-export const getUserStatus = userId =>  dispatch => profilesApi.getStatus(userId).then(data => dispatch(setStatus(data)))
-export const getProfilePage = userId => dispatch => profilesApi.getProfile(userId).then(data => dispatch(setUserProfile(data)));
+export const getUserStatus = userId =>  dispatch => profilesApi.getStatus(userId).then(data => dispatch(setStatus(data)));
+export const getProfilePage = userId => dispatch => {
+		dispatch(isToggleFetchingProfile(true));
+		profilesApi.getProfile(userId)
+			.then(data => {
+				dispatch(isToggleFetchingProfile(false));
+				dispatch(setUserProfile(data));
+			});
+};
 
 export const updateUserStatus = status =>  dispatch => profilesApi.updateStatus(status).then(data => {if (data.resultCode === 0) dispatch(setStatus(status))})
 
