@@ -3,6 +3,8 @@ import s from "./login.module.css";
 import { reduxForm, Field } from "redux-form";
 import { startLogin, loginProcess } from "../../redux/authReducer";
 import { authApi } from "../../api/api";
+import { Input } from "../common/FormsControls/FormsControls";
+import { required } from "../../utils/validators/validators";
 
 const LoginForm = (props) => {
 	return (
@@ -12,7 +14,8 @@ const LoginForm = (props) => {
 					type={"text"}
 					placeholder={"Email"}
 					name={"email"}
-					component={"input"}
+					component={Input}
+					validate={[required]}
 				/>
 			</div>
 			<div>
@@ -20,14 +23,14 @@ const LoginForm = (props) => {
 					type={"text"}
 					placeholder={"Password"}
 					name={"password"}
-					component={"input"}
+					component={Input}
+					validate={[required]}
 				/>
 			</div>
 			<div>
-				<p>
-					<Field type={"checkbox"} name={"rememberMe"} component={"input"} />
-					Remember Me
-				</p>
+				<span>
+					Remember Me <Field type={"checkbox"} name={"rememberMe"} component={Input} validate={[required]} /> 
+				</span>
 			</div>
 			<div>
 				<button type='submit'>Login</button>
