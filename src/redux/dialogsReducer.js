@@ -1,5 +1,4 @@
-const add_Message = 'add_Message';
-const update_New_Message_Text = 'update_New_Message_Text';
+const ADD_MESSAGE = 'ADD_MESSAGE';
 
 let initialState = {
 	dialogsData: [
@@ -27,38 +26,28 @@ let initialState = {
 		{ id: 12, message: "Oh, it's great!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
 		{ id: 13, message: "I am happy for him!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
 		{ id: 14, message: "Ok, buy!", name: "me", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" }
-	],
-	newMessageText: "It-Camasutra"
-
+	]
 };
 
 const dialogsReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case add_Message:
+		case ADD_MESSAGE:
 			return {
 				...state,
-				newMessageText: '',
 				messagesData:  [
 					...state.messagesData,
 					{
 						id: state.messagesData.length + 1,
-						message: state.newMessageText,
+						message: action.newMessageText,
 						name: "me",
 						ava: "https://wallpapercave.com/wp/PCG5mFl.jpg"
 					}
 				]
 			};
-		case update_New_Message_Text:
-			return {
-				...state,
-				newMessageText: action.newText
-			};
 		default: 
 			return state;
 	}
 }
-export const addMessage = () => ({type: add_Message});
-export const updateNewMessageText = (text) => ({type: update_New_Message_Text, newText: text});
-
+export const addMessage = (newMessageText) => ({type: ADD_MESSAGE, newMessageText});
 
 export default dialogsReducer;

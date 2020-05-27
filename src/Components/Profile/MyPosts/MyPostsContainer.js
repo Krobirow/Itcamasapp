@@ -47,17 +47,14 @@ let mapStateToProps = (state) => {
 	}
 }
 
-// let mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		addPost: () => {
-// 			dispatch(addPost());
-// 		},
-// 		updateNewPostText: (text) => {
-// 			dispatch(updateNewPostText(text));
-// 		}
-// 	}
-// }
+let mapDispatchToProps = (dispatch) => {
+	return {
+		addPost: (newPostText) => {
+			dispatch(addPost(newPostText));
+		}
+	}
+}
 
-const MyPostsContainer = connect(mapStateToProps, {addPost, updateNewPostText})(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;

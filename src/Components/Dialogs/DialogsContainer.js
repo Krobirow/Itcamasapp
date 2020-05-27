@@ -1,4 +1,4 @@
-import { addMessage, updateNewMessageText } from "../../redux/dialogsReducer";
+import { addMessage } from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from 'react-redux';
 import { withAuthRedirect } from '../hoc/WithAuthRedirect';
@@ -19,19 +19,15 @@ let mapStateToProps = (state) => {
 // }
 
 // функциональный вариант передачи колбеков и екшенов
-// let mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		addMessageActionCreator: () => {
-// 			dispatch(addMessageActionCreator());
-// 		},
-// 		updateNewMessageTextActionCreator: (text) => {
-// 			let action = updateNewMessageTextActionCreator(text)
-// 			dispatch(action);
-// 		}
-// 	}
-// }
+let mapDispatchToProps = (dispatch) => {
+	return {
+		addMessage: (newMessageText) => {
+			dispatch(addMessage(newMessageText));
+		}
+	}
+}
 
 export default compose(
-	connect(mapStateToProps, {addMessage, updateNewMessageText}),
+	connect(mapStateToProps, mapDispatchToProps),
 	withAuthRedirect
 )(Dialogs);

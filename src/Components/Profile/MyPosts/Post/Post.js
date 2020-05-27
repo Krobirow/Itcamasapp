@@ -6,7 +6,7 @@ const Post = (props) => {
 		<div className={s.postWrap}>
 			<div className={`${s.post}`}>
 				<img src="https://wallpapercave.com/wp/PCG5mFl.jpg" alt="cat" />
-				<span>{props.message}</span>
+				<span>{props.postText}</span>
 				<div className={s.likeDislikeBlock}>
 					<span className={s.like}><a href="/like">Like &nbsp;</a> &nbsp;{props.likesCount} &nbsp;</span>
 					<span className={s.dislike}><a href="/dislike">Dislike &nbsp;</a> &nbsp;{props.dislikesCount} &nbsp;</span> 
