@@ -9,13 +9,17 @@ import Preloader from '../common/Preloader/Preloader';
 class ProfileContainer extends Component {
 	componentDidMount() {
 		let userId = this.props.match.params.userId;
-		if(!userId) userId = 8300;
+		if(!userId) {
+			userId = this.props.authorizedUserId;
+			if(!userId) {
+				this.props.history.push("/login");
+			}
+		}
 		this.props.getProfilePage(userId);
 
 		this.props.getUserStatus(userId);
 	}
 	render() {
-		console.log(this.props.isFetching);
 		return (
 			<div>
 				{this.props.isFetching 
@@ -32,7 +36,9 @@ class ProfileContainer extends Component {
 let mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
 	status: state.profilePage.status,
-	isFetching: state.profilePage.isFetching
+	isFetching: state.profilePage.isFetching,
+	authorizedUserId: state.auth.userId,
+	isAuth: state.auth.isAuth
 });
 
 export default compose(

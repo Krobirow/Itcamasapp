@@ -33,6 +33,9 @@ const LoginForm = (props) => {
 					Remember Me <Field type={"checkbox"} name={"rememberMe"} component={Input} validate={[required]} /> 
 				</span>
 			</div>
+				{ props.error && <div className={s.formGlobalError}> 
+					{props.error}
+				</div>}
 			<div>
 				<button type='submit'>Login</button>
 			</div>
