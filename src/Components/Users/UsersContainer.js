@@ -7,10 +7,12 @@ import Users from "./Users";
 import {getFromStateUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress } from "../../redux/usersSelector";
 class UsersContainer extends Component {
 	componentDidMount() {
-		this.props.getUsers(this.props.currentPage, this.props.pageSize);
+		const {currentPage, pageSize, getUsers} = this.props;
+		getUsers(currentPage, pageSize);
 	}
 	onPageChanger = (pageNumber) => {
-		this.props.getUsers(pageNumber, this.props.pageSize)
+		const {pageSize, getUsers} = this.props;
+		getUsers(pageNumber, pageSize)
 	}
 
 	render() {

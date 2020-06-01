@@ -61,16 +61,22 @@ const isToggleFetchingProfile = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFe
 const setStatus = (status) => ({type: SET_STATUS, status});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
 
-export const getUserStatus = userId =>  dispatch => profilesApi.getStatus(userId).then(data => dispatch(setStatus(data)));
-export const getProfilePage = userId => dispatch => {
-		dispatch(isToggleFetchingProfile(true));
-		profilesApi.getProfile(userId)
-			.then(data => {
-				dispatch(isToggleFetchingProfile(false));
-				dispatch(setUserProfile(data));
-			});
+export const getUserStatus = userId =>  async dispatch => {
+	let data =  await profilesApi.getStatus(userId);
+	dispatch(setStatus(data));
 };
 
-export const updateUserStatus = status =>  dispatch => profilesApi.updateStatus(status).then(data => {if (data.resultCode === 0) dispatch(setStatus(status))})
+export const getProfilePage = userId => async dispatch => {
+		dispatch(isToggleFetchingProfile(true));
+		
+		let data =  await profilesApi.getProfile(userId)
+			dispatch(isToggleFetchingProfile(false));
+			dispatch(setUserProfile(data));
+};
+
+export const updateUserStatus = status => async dispatch =>{ 
+	let data = await profilesApi.updateStatus(status);
+	if (data.resultCode === 0) dispatch(setStatus(status));
+};
 
 export default profileReducer;

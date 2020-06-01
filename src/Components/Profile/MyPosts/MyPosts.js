@@ -31,9 +31,6 @@ const MyPostsForm = (props) => {
 const MyPostsReduxForm = reduxForm({ form: "addPost" })(MyPostsForm);
 
 const MyPosts = React.memo( props => {
-
-		console.log('render myPosts');
-
 		let myPostsEl = props.myPostData.map((p) => (
 			<Post
 				key={p.id}

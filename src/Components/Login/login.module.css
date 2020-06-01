@@ -17,3 +17,8 @@
     padding: 5px;
     color: red;
 }
+
+.formCheckbox {
+    display: flex;
+    align-items: center;
+}

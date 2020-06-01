@@ -4,20 +4,3 @@
 	border-radius: 50%;
 }
 
-.selectedPage {
-	font-weight: bold;
-	font-size: 20px;
-}
-
-.paginationWrapp{
-	display: flex;
-	flex-wrap: wrap;
-	padding: 10px;
-	max-width: 650px;
-	width: 100%;
-}
-
-.paginationWrapp span{
-	padding: 5px;
-
-}
