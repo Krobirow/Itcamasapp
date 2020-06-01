@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import s from "./myposts.module.css";
 
 import Post from "./Post/Post";
@@ -9,7 +9,7 @@ import {
 } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 
-const maxLength = maxlengthCreator(10);
+const maxLength = maxlengthCreator(1000);
 
 const MyPostsForm = (props) => {
 	return (

@@ -3,6 +3,7 @@ import { profilesApi } from "../api/api";
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
@@ -30,6 +31,11 @@ const profileReducer = (state = initialState, action) => {
 					}
 				],
 			};
+		case DELETE_POST: 
+			return {
+				...state, 
+				myPostData: state.myPostData.filter(p => p.id !== action.postId)
+			}
 		case SET_USER_PROFILE: 
 			return {
 				...state, profile: action.profile
@@ -53,6 +59,7 @@ const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 const isToggleFetchingProfile = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 const setStatus = (status) => ({type: SET_STATUS, status});
+export const deletePost = (postId) => ({type: DELETE_POST, postId});
 
 export const getUserStatus = userId =>  dispatch => profilesApi.getStatus(userId).then(data => dispatch(setStatus(data)));
 export const getProfilePage = userId => dispatch => {
