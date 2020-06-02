@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
 import sidebarReducer from "./sidebarReducer";
@@ -19,9 +19,14 @@ let reducers = combineReducers({
 	app: appReducer
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+// store without extension
+// let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
-window.store = store;
+// Created store for chrome extension redux
+const composeEnchances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnchances( applyMiddleware(thunkMiddleware)), );
+
+window.__store__ = store;
 
 
 export default store;
