@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { compose } from "redux";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, BrowserRouter } from "react-router-dom";
 
 import s from "./App.module.css";
 
@@ -17,7 +17,8 @@ import LoginPage from "../Login/Login";
 
 import { initializeApp } from "../../redux/appReducer";
 import Preloader from "../common/Preloader/Preloader";
-class App extends Component {
+import store from "../../redux/redux-store";
+class AppWrapper extends Component {
 
 	componentDidMount() {
 		this.props.initializeApp();
@@ -46,7 +47,18 @@ class App extends Component {
 const mapStateToProps = state => ({
 	initialized: state.app.initialized
 })
-export default compose(
+
+const AppContainer = compose(
 		withRouter,
 		connect(mapStateToProps, {initializeApp})
-	)(App);
+	)(AppWrapper);
+
+const App = () => {
+	return 	<BrowserRouter>
+		<Provider store={store}>
+			<AppContainer />
+		</Provider>
+	</BrowserRouter>
+}
+
+export default App;

@@ -4,14 +4,14 @@ import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 
-const ProfileInfo = ({profile, status, updateUserStatus}) => {
+const ProfileInfo = ({profile, status, ...props}) => {
 	if(!profile) return <Preloader />
 
 	return <div className={s.profileInfo}>
 			<div className={s.avatarDescr}>
 				<img src={profile.photos.large ? profile.photos.large : 'https://wallpapercave.com/wp/PCG5mFl.jpg'} alt="ava" />
 				<div>
-					<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
+					<ProfileStatusWithHooks status={status} updateUserStatus={props.updateUserStatus}/>
 				</div>
 				
 			</div>
