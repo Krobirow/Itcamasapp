@@ -57,7 +57,7 @@ const AppContainer = compose(
 	)(AppWrapper);
 
 const App = () => {
-	return 	<HashRouter basename={process.eny.PUBLIC_URL}>
+	return 	<HashRouter>
 		<Provider store={store}>
 			<AppContainer />
 		</Provider>
