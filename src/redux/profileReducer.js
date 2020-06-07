@@ -1,4 +1,5 @@
 import { profilesApi } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -7,6 +8,8 @@ const DELETE_POST = 'DELETE_POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
+const EDIT_PROFILE_DESCRIPTION = 'EDIT_PROFILE_DESCRIPTION';
+
 let initialState = {
 	myPostData: [
 		{ id: 1, postText: "It's my first post", likesCount: 34, dislikesCount: 5 },
@@ -14,7 +17,8 @@ let initialState = {
 	],
 	profile: null,
 	status: "",
-	isFetching: false
+	isFetching: false,
+	editMode: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -51,7 +55,11 @@ const profileReducer = (state = initialState, action) => {
 			}
 		case SAVE_PHOTO_SUCCESS: 
 			return {
-				...state, profile: {...state.profile, photos: action.photos}
+				...state, profile: {...state.profile, photos: action.editedProfile}
+			}
+		case EDIT_PROFILE_DESCRIPTION: 
+			return {
+				...state, editMode: action.editMode
 			}
 		default:
 			return state;
@@ -63,6 +71,9 @@ export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 const isToggleFetchingProfile = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 const setStatus = (status) => ({type: SET_STATUS, status});
+
+const saveProfileSuccess = (editedProfile) => ({type: EDIT_PROFILE_DESCRIPTION, editedProfile});
+
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
 
 const savePhotoSuccess = (photos) =>  ({type: SAVE_PHOTO_SUCCESS, photos});
@@ -88,6 +99,18 @@ export const updateUserStatus = status => async dispatch =>{
 export const savePhoto = file => async dispatch =>{ 
 	let data = await profilesApi.savePhoto(file);
 	if (data.resultCode === 0) dispatch(savePhotoSuccess(data.data.photos));
+};
+
+export const saveProfile = profile => async (dispatch, getState) =>{
+	const userId = getState().auth.userId;
+	let data = await profilesApi.saveProfile(profile);
+	if (data.resultCode === 0) {
+		dispatch(getProfilePage(userId))
+	} else {
+		let message = data.messages.length > 0 ? data.messages[0] : "One of the links is invalid";
+		dispatch(stopSubmit("edit-profile", {_error : message}))
+		return Promise.reject(data.messages[0]);
+	}	
 };
 
 export default profileReducer;

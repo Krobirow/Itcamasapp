@@ -32,13 +32,11 @@ class AppWrapper extends Component {
 					<HeaderContainer />
 					<Aside />
 					<React.Suspense fallback={<Preloader />}>
-						<Switch>
-							<div className={s.appWrapperContent}>
-								<Route path='/dialogs' render={() => <DialogsContainer />} />
-								<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-								<Route path='/users' render={() => <UsersContainer />} />
-							</div>
-						</Switch>
+						<div className={s.appWrapperContent}>
+							<Route path='/dialogs' render={() => <DialogsContainer />} />
+							<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+							<Route path='/users' render={() => <UsersContainer />} />
+						</div>
 					</React.Suspense>
 					<Route path='/login' render={() => <LoginPage />} />
 					<Footer />

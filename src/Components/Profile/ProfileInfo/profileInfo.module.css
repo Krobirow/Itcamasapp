@@ -16,3 +16,39 @@
 	width: 300px;
     height: 200px;
 }
+
+.statusInfo {	
+	display: flex;
+	flex-direction: column;
+	padding-top: 10px;
+}
+
+.statusInfo div  {
+	color: aqua;
+	padding-top: 10px;
+}
+.contactsSpan {
+	padding: 15px;
+}
+.contactsWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding: 15px;
+}
+.contactsWrapper li {
+	padding: 5px;
+	list-style-type: none;
+	text-decoration: none;
+	color: aqua;
+}
+.contactsWrapper li b a {
+	text-decoration: none;
+	color: aqua;
+}
+
+.formGlobalError {
+    border: 2px solid red;
+    padding: 5px;
+    color: red;
+}
