@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getProfilePage, getUserStatus, updateUserStatus } from '../../redux/profileReducer';
+import { getProfilePage, getUserStatus, updateUserStatus, savePhoto } from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../hoc/WithAuthRedirect';
 import Preloader from '../common/Preloader/Preloader';
 class ProfileContainer extends Component {
-	componentDidMount() {
+
+	refreshProfile() {
 		let userId = this.props.match.params.userId;
 		if(!userId) {
 			userId = this.props.authorizedUserId;
@@ -19,14 +20,28 @@ class ProfileContainer extends Component {
 
 		this.props.getUserStatus(userId);
 	}
+
+	componentDidMount() {
+		this.refreshProfile();
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if(this.props.match.params.userId !== prevProps.match.params.userId) {
+			this.refreshProfile();
+		}
+		
+	}
+
 	render() {
 		return (
 			<div>
 				{this.props.isFetching 
 					? <Preloader /> 
 					: <Profile {...this.props} 
+						isOwner={!this.props.match.params.userId}
 						profile={this.props.profile} 
 						status={this.props.status} 
+						savePhoto={this.props.savePhoto}
 						updateUserStatus={this.props.updateUserStatus} />}
 				</div>
 			)
@@ -42,7 +57,7 @@ let mapStateToProps = (state) => ({
 });
 
 export default compose(
-	connect(mapStateToProps, {getProfilePage, getUserStatus, updateUserStatus}),
+	connect(mapStateToProps, {getProfilePage, getUserStatus, updateUserStatus, savePhoto}),
 	withRouter,
 	withAuthRedirect
 )(ProfileContainer);

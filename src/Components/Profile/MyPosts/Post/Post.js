@@ -1,11 +1,12 @@
 import React from "react";
 import s from "./post.module.css";
+import avatar from '../../../../assets/profilePic.jpg'
 
 const Post = (props) => {
 	return (
 		<div className={s.postWrap}>
 			<div className={`${s.post}`}>
-				<img src="https://wallpapercave.com/wp/PCG5mFl.jpg" alt="cat" />
+				<img src={avatar} alt="cat" />
 				<span>{props.postText}</span>
 				<div className={s.likeDislikeBlock}>
 					<span className={s.like}><a href="/like">Like &nbsp;</a> &nbsp;{props.likesCount} &nbsp;</span>

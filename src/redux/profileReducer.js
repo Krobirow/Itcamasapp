@@ -5,6 +5,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
 let initialState = {
 	myPostData: [
@@ -48,6 +49,10 @@ const profileReducer = (state = initialState, action) => {
 			return {
 				...state, isFetching: action.isFetching
 			}
+		case SAVE_PHOTO_SUCCESS: 
+			return {
+				...state, profile: {...state.profile, photos: action.photos}
+			}
 		default:
 			return state;
 	}
@@ -57,9 +62,10 @@ export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 const isToggleFetchingProfile = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
-
 const setStatus = (status) => ({type: SET_STATUS, status});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
+
+const savePhotoSuccess = (photos) =>  ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const getUserStatus = userId =>  async dispatch => {
 	let data =  await profilesApi.getStatus(userId);
@@ -77,6 +83,11 @@ export const getProfilePage = userId => async dispatch => {
 export const updateUserStatus = status => async dispatch =>{ 
 	let data = await profilesApi.updateStatus(status);
 	if (data.resultCode === 0) dispatch(setStatus(status));
+};
+
+export const savePhoto = file => async dispatch =>{ 
+	let data = await profilesApi.savePhoto(file);
+	if (data.resultCode === 0) dispatch(savePhotoSuccess(data.data.photos));
 };
 
 export default profileReducer;

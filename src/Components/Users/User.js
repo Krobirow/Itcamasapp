@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './users.module.css';
 import { NavLink } from 'react-router-dom';
+import avatar from '../../assets/profilePic.jpg'
 
 const User = ({user, followingInProgress, unFollow, follow}) => {
 	return (
@@ -13,7 +14,7 @@ const User = ({user, followingInProgress, unFollow, follow}) => {
 									src={
 										user.photos.small != null
 											? user.photos.small
-											: 'https://wallpapercave.com/wp/PCG5mFl.jpg'
+											: avatar
 									}
 									alt='ava'
 								/>
