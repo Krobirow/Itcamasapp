@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect, Provider } from "react-redux";
 import { compose } from "redux";
-import { Route, withRouter, BrowserRouter, Switch } from "react-router-dom";
+import { Route, withRouter, Switch, HashRouter } from "react-router-dom";
 import { initializeApp } from "../../redux/appReducer";
 import Preloader from "../common/Preloader/Preloader";
 import store from "../../redux/redux-store";
@@ -57,11 +57,11 @@ const AppContainer = compose(
 	)(AppWrapper);
 
 const App = () => {
-	return 	<BrowserRouter>
+	return 	<HashRouter basename={process.eny.PUBLIC_URL}>
 		<Provider store={store}>
 			<AppContainer />
 		</Provider>
-	</BrowserRouter>
+	</HashRouter>
 }
 
 export default App;
