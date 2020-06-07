@@ -6,7 +6,7 @@ const Paginator = ({
 	totalUsersCount,
 	pageSize,
 	onPageChanger,
-	portionSize = 455,
+	portionSize = 15,
 }) => {
 	let pagesCount = Math.ceil(totalUsersCount / pageSize);
 
@@ -22,14 +22,14 @@ const Paginator = ({
 
 	return (
 		<div className={s.paginationWrapp}>
-			{portionNumber ? (
+			{
 				<button disabled={portionNumber === 1}
 					onClick={() => {
 						setPortionNumber(portionNumber - 1);
 					}}>
 					PREV
 				</button>
-			) : portionNumber > 1 }
+			}
 
 			{pages
 				.filter(page =>
@@ -49,7 +49,7 @@ const Paginator = ({
 				})}
 			{
 				<button
-                    disabled={portionCount < portionNumber}
+                    disabled={pages.length < rightPortionPageNumber}
 					onClick={() => {
 						setPortionNumber(portionNumber + 1);
 					}}>
