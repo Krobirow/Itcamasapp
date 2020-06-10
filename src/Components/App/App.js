@@ -36,9 +36,9 @@ class AppWrapper extends Component {
 							<Route path='/dialogs' render={() => <DialogsContainer />} />
 							<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
 							<Route path='/users' render={() => <UsersContainer />} />
+							<Route path='/login' render={() => <LoginPage />} />
 						</div>
 					</React.Suspense>
-					<Route path='/login' render={() => <LoginPage />} />
 					<Footer />
 				</div>
 			);

@@ -23,7 +23,7 @@ const ProfileInfo = ({profile, status, isOwner, updateUserStatus, savePhoto, sav
 
 	return <div className={s.profileInfo}>
 			<div className={s.avatar}>
-				<img src={profile.photos.large ? avatar : null} alt="ava" />
+				<img src={!profile.photos.large ? avatar : profile.photos.large} alt="ava" />
 				<div className={s.statusInfo}>
 					<div> <span> <b>{profile.fullName} </b></span></div>
 					<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
