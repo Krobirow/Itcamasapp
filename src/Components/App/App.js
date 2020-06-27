@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect, Provider } from "react-redux";
 import { compose } from "redux";
-import { Route, withRouter, Switch, HashRouter } from "react-router-dom";
+import { Route, withRouter, Switch, HashRouter, Redirect } from "react-router-dom";
 import { initializeApp } from "../../redux/appReducer";
 import Preloader from "../common/Preloader/Preloader";
 import store from "../../redux/redux-store";
@@ -18,9 +18,16 @@ const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
 const ProfileContainer = React.lazy(() => import("../Profile/ProfileContainer"));
 
 class AppWrapper extends Component {
+	catchAllUnhadledErrors = (promiseRejectionEvent) => {
+		alert('some error');
+	}
 
 	componentDidMount() {
 		this.props.initializeApp();
+		window.addEventListener("unhandledrejection", this.catchAllUnhadledErrors)
+	}
+	componentWillUnmount() {
+		window.removeEventListener("unhandledrejection", this.catchAllUnhadledErrors)
 	}
 
 	render() {
@@ -33,10 +40,14 @@ class AppWrapper extends Component {
 					<Aside />
 					<React.Suspense fallback={<Preloader />}>
 						<div className={s.appWrapperContent}>
-							<Route path='/dialogs' render={() => <DialogsContainer />} />
-							<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-							<Route path='/users' render={() => <UsersContainer />} />
-							<Route path='/login' render={() => <LoginPage />} />
+							<Switch>
+								<Route path='/' exact render={() => <Redirect to={'/profile'}/>} />
+								<Route path='/dialogs' render={() => <DialogsContainer />} />
+								<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+								<Route path='/users' render={() => <UsersContainer />} />
+								<Route path='/login' render={() => <LoginPage />} />
+								<Route path='*' render={ () => <div> 404 NOT FOUND </div> } />
+							</Switch>
 						</div>
 					</React.Suspense>
 					<Footer />
