@@ -7,7 +7,7 @@ import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Textarea } from "../common/FormsControls/FormsControls";
 import { required, maxlengthCreator } from "../../utils/validators/validators";
 import { PostDataElType } from "../../redux/types";
-import { MessagesDataEl } from "../../redux/dialogsReducer";
+import { MessagesDataEl } from "../../redux/types";
 
 type FormValueType = { newMessageText: string }
 

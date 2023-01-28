@@ -1,20 +1,9 @@
-import { ResponseWithEmptyDataObj, UserType } from './types';
-import { usersApi } from "../api/api";
+import { ResponseType, UserType } from './types';
+import { usersApi } from "../api/usersApi";
 import { updateObjectInArray } from "./usersObjectsHelper";
 import { Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-import { AppStateType, InferActionTypes } from './redux-store';
+import { BaseThunkType, InferActionTypes } from './redux-store';
 import { ResultCodesEnum } from './enums';
-
-enum UsersReducAT {
-	FOLLOW = 'FOLLOW',
-	UNFOLLOW = 'UNFOLLOW',
-	SET_USERS = 'SET_USERS',
-	SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
-	SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT',
-	TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
-	TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS',
-}
 
 const initialState = {
 	users: [ ] as Array<UserType>,
@@ -24,8 +13,6 @@ const initialState = {
 	isFetching: false as boolean,
 	followingInProgress: [2, 3] as Array<number>
 };
-
-export type InitStateOfUserReducerType = typeof initialState;
 
 const userReducer = (state: InitStateOfUserReducerType = initialState, action: ActionsTypes): InitStateOfUserReducerType => {
 	switch (action.type) {
@@ -70,10 +57,6 @@ const userReducer = (state: InitStateOfUserReducerType = initialState, action: A
 	}
 }
 
-type ActionsTypes = InferActionTypes<typeof usersActions>
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-type DispatchType = Dispatch<ActionsTypes>
-
 export const usersActions = {
 	isToggleFetching: (isFetching: boolean) => ({type: UsersReducAT.TOGGLE_IS_FETCHING, isFetching} as const),
 	followSuccess: (userId: number) => ({type: UsersReducAT.FOLLOW, userId} as const),
@@ -94,7 +77,7 @@ export const getUsers = (currentPage = 1, pageSize: number): ThunkType => async 
 	dispatch(usersActions.isToggleFetching(false));
 }
 
-const _followUnfollowToggle = async (dispatch: DispatchType, userId: number, apiMethod: (userId: number) => Promise<ResponseWithEmptyDataObj>, actionCreator: (userId: number) => ActionsTypes) => {
+const _followUnfollowToggle = async (dispatch: DispatchType, userId: number, apiMethod: (userId: number) => Promise<ResponseType>, actionCreator: (userId: number) => ActionsTypes) => {
 	dispatch(usersActions.isToggleFollowingProgress(true, userId));
 	const data = await apiMethod(userId);
 	if (data.resultCode === ResultCodesEnum.Success) {
@@ -106,3 +89,18 @@ export const follow = (userId = 1): ThunkType => { return async (dispatch) => _f
 export const unFollow = (userId = 1): ThunkType => { return async (dispatch) => _followUnfollowToggle(dispatch, userId, usersApi.onUnfollow, usersActions.unfollowSuccess);}
 
 export default userReducer;
+
+export type InitStateOfUserReducerType = typeof initialState;
+
+enum UsersReducAT {
+	FOLLOW = 'SN/USERS/FOLLOW',
+	UNFOLLOW = 'SN/USERS/UNFOLLOW',
+	SET_USERS = 'SN/USERS/SET_USERS',
+	SET_CURRENT_PAGE = 'SN/USERS/SET_CURRENT_PAGE',
+	SET_USERS_TOTAL_COUNT = 'SN/USERS/SET_USERS_TOTAL_COUNT',
+	TOGGLE_IS_FETCHING = 'SN/USERS/TOGGLE_IS_FETCHING',
+	TOGGLE_IS_FOLLOWING_PROGRESS = 'SN/USERS/TOGGLE_IS_FOLLOWING_PROGRESS',
+}
+type ActionsTypes = InferActionTypes<typeof usersActions>
+type ThunkType = BaseThunkType<ActionsTypes>
+type DispatchType = Dispatch<ActionsTypes>

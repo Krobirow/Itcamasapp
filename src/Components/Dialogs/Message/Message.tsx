@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { MessagesDataEl } from "../../../redux/dialogsReducer";
+import { MessagesDataEl } from "../../../redux/types";
 import s from "./message.module.css";
 
 type MessageProps = {

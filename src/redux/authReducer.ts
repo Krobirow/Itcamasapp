@@ -1,13 +1,8 @@
-import { authApi, securityApi } from "../api/api";
+import { authApi } from "../api/authApi";
+import { securityApi } from "../api/securityApi";
 import { FormAction, stopSubmit } from "redux-form";
-import { AppStateType, InferActionTypes } from "./redux-store";
-import { ThunkAction } from "redux-thunk";
+import { BaseThunkType, InferActionTypes } from "./redux-store";
 import { ResultCodeForCaptchaEnum, ResultCodesEnum } from "./enums";
-
-enum AuthReducerEnums {
-	SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA',
-	GET_CAPTHCA_URL = 'samurai-network/auth/GET_CAPTHCA_URL'
-}
 
 const initialState = {
 	userId: null as null | number,
@@ -18,7 +13,6 @@ const initialState = {
 	isAuth: false as boolean,
 	captchaURL: null as null | string
 }
-export type InitialStateType = typeof initialState
 
 const authReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
 	switch (action.type) {
@@ -36,10 +30,6 @@ const authReducer = (state = initialState, action: ActionsTypes): InitialStateTy
 			return state;
 	}
 }
-
-export type AuthThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-export type AuthThunkTypeWithReduxForm = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes | FormAction>
-type ActionsTypes = InferActionTypes<typeof authActions>
 
 export const authActions = {
 	getCaptchaURLSuccess: (url: string) => ({type: AuthReducerEnums.GET_CAPTHCA_URL, url} as const),
@@ -77,3 +67,13 @@ export const startLogout = (): AuthThunkType => async (dispatch) => {
 }
 
 export default authReducer;
+
+enum AuthReducerEnums {
+	SET_USER_DATA = 'SN/AUTH/SET_USER_DATA',
+	GET_CAPTHCA_URL = 'SN/AUTH/GET_CAPTHCA_URL'
+}
+
+type InitialStateType = typeof initialState
+type ActionsTypes = InferActionTypes<typeof authActions>
+type AuthThunkType = BaseThunkType<ActionsTypes>
+type AuthThunkTypeWithReduxForm = BaseThunkType<ActionsTypes | FormAction>

@@ -1,12 +1,5 @@
-import { ThunkAction } from 'redux-thunk';
 import { getAuthUserData } from "./authReducer";
-import { AppStateType, InferActionTypes } from "./redux-store";
-
-enum InitAppEnums { INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS' }
-
-type AppReducerInitState = typeof initialState;
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-type ActionsTypes = InferActionTypes<typeof initAppActions>
+import { BaseThunkType, InferActionTypes } from "./redux-store";
 
 const initialState = { initialized: false };
 
@@ -26,3 +19,8 @@ export const initAppActions = { initializedSuccess: () => ({type: InitAppEnums.I
 export const initializeApp = (): ThunkType => (dispatch) => dispatch(getAuthUserData()).then(()=>{ dispatch(initAppActions.initializedSuccess()); });
 
 export default appReducer;
+
+enum InitAppEnums { INITIALIZED_SUCCESS = 'SN/APP/INITIALIZED_SUCCESS' }
+type AppReducerInitState = typeof initialState;
+type ActionsTypes = InferActionTypes<typeof initAppActions>
+type ThunkType = BaseThunkType<ActionsTypes>

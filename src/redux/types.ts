@@ -63,32 +63,33 @@ export interface UserResponseInterf {
 
 export interface RespWithResCodeAndMessagesInterf {
 	resultCode: ResultCodesEnum | ResultCodeForCaptchaEnum,
-	messages: Array<string>
+	messages: Array<string>,
+}
+// ResultCodesEnum | ResultCodeForCaptchaEnum,
+export interface ResponseType<D = Record<string, never>, ResCode = ResultCodesEnum> {
+	resultCode: ResCode 
+	messages: Array<string>,
+	data: D
 }
 
 export interface RespForCaptchaInterf extends RespWithResCodeAndMessagesInterf {
 	url: string
 }
 
-export interface AuthMeUserRespInterf extends RespWithResCodeAndMessagesInterf {
-	data: {
-		id: number,
-		email: string,
-		login: string
-	}
+export interface AuthMeUserRespInterf {
+	id: number,
+	email: string,
+	login: string
 }
 
-export interface LoginMeInterf extends RespWithResCodeAndMessagesInterf {
-	data: { userId: number }
+export interface PhotosResponse {
+	photos: PhotosInterf
 }
-
-export interface ResponseWithEmptyDataObj extends RespWithResCodeAndMessagesInterf {
-	data: Record<string, never>
-}
-
 
 export interface ProfileACTypes {
 	updateUserStatus: (status: string) => void,
 	savePhoto: (file: File) => void,
 	saveProfile: (profile: ProfileTypeDataEl) => Promise<void>
 }
+
+export interface MessagesDataEl extends PostDataElType { message: string }

@@ -1,8 +1,3 @@
-
-type SideBarAsideFriendsType = {
-	id: number, name: string, ava: string 
-}
-
 const initialState = {
 	asideFriends: [
 		{ id: 1, name: "Dimych", ava: "https://wallpapercave.com/wp/PCG5mFl.jpg" },
@@ -11,10 +6,13 @@ const initialState = {
 	] as Array<SideBarAsideFriendsType>
 };
 
-type InitStateInSideBar = typeof initialState;
-
 const sidebarReducer = (state: InitStateInSideBar = initialState): InitStateInSideBar => {
 	return state;
 }
 
 export default sidebarReducer;
+
+type InitStateInSideBar = typeof initialState;
+type SideBarAsideFriendsType = {
+	id: number, name: string, ava: string 
+}

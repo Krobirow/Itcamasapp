@@ -1,24 +1,8 @@
-import { AppStateType, InferActionTypes } from './redux-store';
-import { ThunkAction } from 'redux-thunk';
-import { profilesApi } from "../api/api";
+import { BaseThunkType, InferActionTypes } from './redux-store';
+import { profilesApi } from "../api/profilesApi";
 import { FormAction, stopSubmit } from "redux-form";
 import { MyPostDataElType, PhotosInterf, ProfileTypeDataEl } from "./types";
 import { ResultCodesEnum } from './enums';
-import { Dispatch } from 'redux';
-
-enum ProfileActionsNames {
-	ADD_POST = 'ADD_POST',
-	SET_USER_PROFILE = 'SET_USER_PROFILE',
-	SET_STATUS = 'SET_STATUS',
-	DELETE_POST = 'DELETE_POST',
-	TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
-	SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS',
-}
-
-type ActionsTypes = InferActionTypes<typeof profileActions>
-export type ProfileThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-type ThunkTypeWithReduxForm = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes | FormAction>
-export type ProfReducDispatchType = Dispatch<ActionsTypes>
 
 const initialState = {
 	newPostText: "",
@@ -31,8 +15,6 @@ const initialState = {
 	isFetching: false,
 	editMode: false
 }
-
-export type InitProfileReducType = typeof initialState
 
 const profileReducer = (state = initialState, action: ActionsTypes): InitProfileReducType => {
 	switch (action.type) {
@@ -104,12 +86,12 @@ export const getProfilePage = (userId: number | null): ProfileThunkType => async
 	dispatch(profileActions.setUserProfile(data));
 }
 
-export const updateUserStatus = (status: string): ProfileThunkType => async (dispatch) =>{ 
+export const updateUserStatus = (status: string): ProfileThunkType => async (dispatch) => { 
 	const data = await profilesApi.updateStatus(status);
 	if (data.resultCode === ResultCodesEnum.Success) dispatch(profileActions.setStatus(status));
 }
 
-export const savePhoto = (file: File): ProfileThunkType => async (dispatch) =>{ 
+export const savePhoto = (file: File): ProfileThunkType => async (dispatch) => { 
 	const data = await profilesApi.savePhoto(file);
 	if (data.resultCode === ResultCodesEnum.Success) dispatch(profileActions._savePhotoSuccess(data.data.photos));
 }
@@ -118,7 +100,8 @@ export const saveProfile = (profile: ProfileTypeDataEl): ThunkTypeWithReduxForm 
 	const userId = getState().auth.userId;
 	const data = await profilesApi.saveProfile(profile);
 	if (data.resultCode === ResultCodesEnum.Success) {
-		dispatch(getProfilePage(userId))
+		if (userId) dispatch(getProfilePage(userId))
+		else throw new Error("UserID can't be null")
 	} else {
 		const message = data.messages.length > 0 ? data.messages[0] : "One of the links is invalid";
 		dispatch(stopSubmit("edit-profile", {_error : message}))
@@ -127,3 +110,17 @@ export const saveProfile = (profile: ProfileTypeDataEl): ThunkTypeWithReduxForm 
 }
 
 export default profileReducer
+
+enum ProfileActionsNames {
+	ADD_POST = 'SN/PROFILE/ADD_POST',
+	SET_USER_PROFILE = 'SN/PROFILE/SET_USER_PROFILE',
+	SET_STATUS = 'SN/PROFILE/SET_STATUS',
+	DELETE_POST = 'SN/PROFILE/DELETE_POST',
+	TOGGLE_IS_FETCHING = 'SN/PROFILE/TOGGLE_IS_FETCHING',
+	SAVE_PHOTO_SUCCESS = 'SN/PROFILE/SAVE_PHOTO_SUCCESS',
+}
+
+export type InitProfileReducType = typeof initialState
+type ActionsTypes = InferActionTypes<typeof profileActions>
+type ProfileThunkType = BaseThunkType<ActionsTypes>
+type ThunkTypeWithReduxForm = BaseThunkType<ActionsTypes | FormAction>

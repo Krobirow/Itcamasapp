@@ -1,17 +1,6 @@
-
-import { ThunkAction } from 'redux-thunk';
 import avatar from '../assets/profilePic.jpg';
-import { AppStateType, InferActionTypes } from './redux-store';
-import { PostDataElType } from './types';
-
-export enum DialogsReducEnums { ADD_MESSAGE = 'ADD_MESSAGE' }
-export interface MessagesDataEl extends PostDataElType { message: string }
-
-type DialogsActionsTypes = InferActionTypes<typeof dialogsActions>
-export type DialogsThunkType = ThunkAction<Promise<void>, AppStateType, unknown, DialogsActionsTypes>
-
-
-export type DialogsReducType = typeof initialState;
+import { BaseThunkType, InferActionTypes } from './redux-store';
+import { MessagesDataEl, PostDataElType } from './types';
 
 const initialState = {
 	dialogsData: [
@@ -71,3 +60,8 @@ export const addMessageAC = (newMessageText: string): DialogsThunkType => async 
 }
 
 export default dialogsReducer;
+
+enum DialogsReducEnums { ADD_MESSAGE = 'SN/DIALOGS/ADD_MESSAGE' }
+type DialogsActionsTypes = InferActionTypes<typeof dialogsActions>
+type DialogsThunkType = BaseThunkType<DialogsActionsTypes>
+export type DialogsReducType = typeof initialState;
