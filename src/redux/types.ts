@@ -1,4 +1,5 @@
 import { ResultCodeForCaptchaEnum, ResultCodesEnum } from "./enums"
+import { ProfileThunkTypeWithReduxForm } from "./profileReducer"
 
 export interface PhotosInterf {
 	small: string | null
@@ -89,7 +90,7 @@ export interface PhotosResponse {
 export interface ProfileACTypes {
 	updateUserStatus: (status: string) => void,
 	savePhoto: (file: File) => void,
-	saveProfile: (profile: ProfileTypeDataEl) => Promise<void>
+	saveProfile: (profile: ProfileTypeDataEl) => ProfileThunkTypeWithReduxForm
 }
 
 export interface MessagesDataEl extends PostDataElType { message: string }

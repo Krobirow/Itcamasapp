@@ -96,7 +96,7 @@ export const savePhoto = (file: File): ProfileThunkType => async (dispatch) => {
 	if (data.resultCode === ResultCodesEnum.Success) dispatch(profileActions._savePhotoSuccess(data.data.photos));
 }
 
-export const saveProfile = (profile: ProfileTypeDataEl): ThunkTypeWithReduxForm => async (dispatch, getState) =>{
+export const saveProfile = (profile: ProfileTypeDataEl): ProfileThunkTypeWithReduxForm => async (dispatch, getState) =>{
 	const userId = getState().auth.userId;
 	const data = await profilesApi.saveProfile(profile);
 	if (data.resultCode === ResultCodesEnum.Success) {
@@ -123,4 +123,4 @@ enum ProfileActionsNames {
 export type InitProfileReducType = typeof initialState
 type ActionsTypes = InferActionTypes<typeof profileActions>
 type ProfileThunkType = BaseThunkType<ActionsTypes>
-type ThunkTypeWithReduxForm = BaseThunkType<ActionsTypes | FormAction>
+export type ProfileThunkTypeWithReduxForm = BaseThunkType<ActionsTypes | FormAction>

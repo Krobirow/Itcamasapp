@@ -43,7 +43,6 @@ import { MyPostDataElType } from '../../../redux/types';
 // }
 
 type MapStateToPropsType = {
-	newPostText: string,
 	myPostData: MyPostDataElType[]
 }
 type MapDispatchToPropsType = {
@@ -53,7 +52,6 @@ type MapDispatchToPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 	return {
 		myPostData: state.profilePage.myPostData,
-		newPostText: state.profilePage.newPostText
 	}
 }
 

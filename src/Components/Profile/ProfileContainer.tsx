@@ -1,30 +1,13 @@
 import React, { ComponentType, PureComponent } from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getProfilePage, getUserStatus, updateUserStatus, savePhoto, saveProfile, InitProfileReducType } from '../../redux/profileReducer';
+import { getProfilePage, getUserStatus, updateUserStatus, savePhoto, saveProfile } from '../../redux/profileReducer';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { withAuthRedirect, WithAuthRedirectPropsTypes } from '../hoc/WithAuthRedirect';
+import { withAuthRedirect } from '../hoc/WithAuthRedirect';
 import Preloader from '../common/Preloader/Preloader';
 import { AppStateType } from '../../redux/redux-store';
 import { ProfileACTypes, ProfileTypeDataEl } from '../../redux/types';
-
-interface MapDispatchPropsType extends ProfileACTypes {
-	getProfilePage: (userId: number) => void,
-	getUserStatus: (userId: number) => void,
-}
-
-type PathParamsType = { userId: string }
-// interface ProfileProps extends InitProfileReducType, WithAuthRedirectPropsTypes { authorizedUserId: number | null }
-
-interface MapStateToPropsType {
-	profile: ProfileTypeDataEl | null;
-	status: string;
-	isFetching: boolean;
-	authorizedUserId: number | null
-}
-
-type DefProps = MapStateToPropsType & WithAuthRedirectPropsTypes & RouteComponentProps<PathParamsType> & MapDispatchPropsType
 
 class ProfileContainer extends PureComponent<DefProps> {
 
@@ -68,21 +51,34 @@ class ProfileContainer extends PureComponent<DefProps> {
 	}
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType & WithAuthRedirectPropsTypes => ({
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 	profile: state.profilePage.profile,
 	status: state.profilePage.status,
 	isFetching: state.profilePage.isFetching,
 	authorizedUserId: state.auth.userId,
-	isAuth: state.auth.isAuth,
 });
 
 
 export default compose(
-	// connect<MapStateToPropsType & WithAuthRedirectPropsTypes, MapDispatchPropsType, Record<string, never>, AppStateType>(
 	withRouter,
 	withAuthRedirect,
-	connect(
+	connect<MapStateToPropsType, MapDispatchPropsType, Record<string, never>, AppStateType>(
 		mapStateToProps,
 		{getProfilePage, getUserStatus, updateUserStatus, savePhoto, saveProfile}
 	),
 )(ProfileContainer) as ComponentType;
+
+interface MapDispatchPropsType extends ProfileACTypes {
+	getProfilePage: (userId: number) => void,
+	getUserStatus: (userId: number) => void,
+}
+
+type PathParamsType = { userId: string }
+interface MapStateToPropsType {
+	profile: ProfileTypeDataEl | null;
+	status: string;
+	isFetching: boolean;
+	authorizedUserId: number | null
+}
+
+type DefProps = MapStateToPropsType & RouteComponentProps<PathParamsType> & MapDispatchPropsType

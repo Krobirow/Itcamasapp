@@ -37,7 +37,7 @@ export const Textarea: React.FC<WrappedFieldProps> = (props) => {
 
 
 export function createField<FormKeysTypes extends string>(
-		type: string, 
+		type: string | undefined, 
 		placeholder: string | undefined, 
 		name: FormKeysTypes, 
 		validators: Array<FieldValidatorType>, 

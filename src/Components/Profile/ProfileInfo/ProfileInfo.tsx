@@ -20,12 +20,13 @@ const ProfileInfo: FC<ProfInfoProps & ProfileACTypes> = ({profile, status, isOwn
 	const [ editMode, setEditMode ] = useState(false);
 
 	if(!profile) {return <Preloader />}
-	const onSubmit = (values: FormDataOfProfileType) => {
-		saveProfile(values).then(()=> setEditMode(false))
+	const onSubmit = async (values: FormDataOfProfileType) => {
+		saveProfile(values);
+		setEditMode(false)
 	};
 
 	const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-		if(e?.target?.files?.length) {
+		if(e.target.files?.length) {
 			savePhoto(e.target.files[0]);
 		}
 	}

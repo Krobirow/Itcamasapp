@@ -5,11 +5,6 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import { ProfileACTypes, ProfileTypeDataEl } from '../../redux/types';
 
-type ProfilePropsType = {
-	isOwner: boolean
-	profile: ProfileTypeDataEl
-	status: string
-}
 const Profile:React.FC<ProfilePropsType & ProfileACTypes> = ({savePhoto, saveProfile, isOwner, profile, status, updateUserStatus}) => {
 	return (
 		<div className={s.profileWrap}>
@@ -25,3 +20,9 @@ const Profile:React.FC<ProfilePropsType & ProfileACTypes> = ({savePhoto, savePro
 }
 
 export default Profile;
+
+type ProfilePropsType = {
+	isOwner: boolean
+	profile: ProfileTypeDataEl
+	status: string
+}

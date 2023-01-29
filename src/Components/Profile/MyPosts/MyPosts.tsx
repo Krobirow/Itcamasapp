@@ -1,45 +1,28 @@
 import React, { FC } from "react";
+import { InjectedFormProps, reduxForm } from "redux-form";
 import s from "./myposts.module.css";
 
 import Post from "./Post/Post";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import {
-	required,
-	maxlengthCreator,
-} from "../../../utils/validators/validators";
-import { Textarea } from "../../common/FormsControls/FormsControls";
+import { required, maxlengthCreator } from "../../../utils/validators/validators";
+import { createField, Textarea } from "../../common/FormsControls/FormsControls";
 import { MyPostDataElType } from "../../../redux/types";
 
-const maxLength = maxlengthCreator(1000);
+const maxLength = maxlengthCreator(1000)
 
-
-type MyPostsFormProps = {
-	newPostText: string
-}
 const MyPostsForm: FC<InjectedFormProps<MyPostsFormProps>> = ({ handleSubmit }) => {
 	return (
 		<form onSubmit={handleSubmit} className={s.form}>
 			<div>
-				<Field
-					component={Textarea}
-					name='newPostText'
-					placeholder='Enter Your post'
-					validate={[required, maxLength]}
-				/>
+				{createField<MyPostsFormValueKeysType>(undefined, "Enter Your post", "newPostText", [required, maxLength], Textarea)}
 			</div>
 			<div>
 				<button type='submit'>Add post</button>
 			</div>
 		</form>
-	);
-};
+	)
+}
 const MyPostsReduxForm = reduxForm<MyPostsFormProps>({ form: "addPost" })(MyPostsForm);
 
-
-type MyPostsProps = {
-	myPostData: MyPostDataElType[]
-	addPostAC: (newPostText: string) => void
-}
 const MyPosts: FC<MyPostsProps> = React.memo(({ myPostData, addPostAC }) => {
 		const myPostsEl = myPostData.map((p) => (
 			<Post
@@ -49,11 +32,11 @@ const MyPosts: FC<MyPostsProps> = React.memo(({ myPostData, addPostAC }) => {
 				likesCount={p.likesCount}
 				dislikesCount={p.dislikesCount}
 			/>
-		));
+		))
 
-		const addNewPost = (values: any) => {
+		const addNewPost = (values: MyPostsFormProps) => {
 			addPostAC(values.newPostText);
-		};
+		}
 
 		return (
 			<div className={s.myPostsWrap}>
@@ -66,7 +49,14 @@ const MyPosts: FC<MyPostsProps> = React.memo(({ myPostData, addPostAC }) => {
 				<h3 className={s.myPostsTitle}> New Posts</h3>
 				{myPostsEl}
 			</div>
-		);
+		)
 })
 
-export default MyPosts;
+export default MyPosts
+
+type MyPostsFormProps = { newPostText: string }
+type MyPostsFormValueKeysType = Extract<keyof MyPostsFormProps, string>
+type MyPostsProps = {
+	myPostData: MyPostDataElType[]
+	addPostAC: (newPostText: string) => void
+}
